@@ -1,6 +1,6 @@
-# Bark
+# Grate
 
-*Bark* is a mod for the VR game Gorilla Tag. It allows the player to summon a 3D interface into the game that toggles various fun/useful mechanics on and off. Because it is only enabled in modded lobbies, this mod is safe to use online.
+*Grate* is a mod for the VR game Gorilla Tag. It allows the player to summon a 3D interface into the game that toggles various fun/useful mechanics on and off. Because it is only enabled in modded lobbies, this mod is safe to use online.
 
 [![Mod Showcase Link](https://img.youtube.com/vi/geyMo9pVSEE/0.jpg)](https://www.youtube.com/watch?v=geyMo9pVSEE)
 
@@ -41,7 +41,7 @@
   pick you up and throw you from afar.
 * `X-Ray` - Allows you to see other players through walls.
 ### Miscellaneous
-* `Join Bark Code` - Allows you to join a private lobby for Bark users.
+* `Join Grate Code` - Allows you to join a private lobby for Bark users.
 
 These modules can be useful for exploring the game world, experimenting with gameplay mechanics, or just having fun with friends. They are **not** meant to be used to harass others, which can result in a ban from the game.
 
@@ -49,23 +49,17 @@ These modules can be useful for exploring the game world, experimenting with gam
 When you join a modded lobby, simply beat on your chest like a gorilla in an alternating fashion with both hands 4 times (LRLR or RLRL). This will summon the interface in front of you. To hide the interface, simply grab it and throw it away.
 
 ## Installation
-To use *Bark*, you will need to have [Monke Mod Manager](https://github.com/DeadlyKitten/MonkeModManager/releases) installed. 
-Make sure to check off Utilla.
-Once you have installed the mod loader, simply drop the `Bark-X.X.X.dll` file into your plugins folder.
 
-If you have Computer Interface installed, download and install `Bark-X.X.X.CI.dll` instead.
-
-![Installation GIF](https://github.com/KyleTheScientist/Bark/blob/master/Marketing/HowToInstall.gif)
 
 ## Important notes
 
-While *Bark* is designed to be safe to use in modded lobbies, it is important to note that using mods in any form in public lobbies can result in a ban from the game. Use *Bark* at your own risk and only in modded lobbies.
+While *Grate* is designed to be safe to use in modded lobbies, it is important to note that using mods in any form in public lobbies can result in a ban from the game. Use *Grate* at your own risk and only in modded lobbies.
 
 ## Bugs and issues
 If you encounter any bugs or issues while using *Bark*, please report them on the mod's GitHub page. I will do my best to address them as soon as possible. 
 
 ## Contributing
-If you would like to contribute to *Bark*, feel free to submit a pull request on the mod's GitHub page. I welcome any and all contributions that can help make the mod better for everyone.
+If you would like to contribute to *Grate*, feel free to submit a pull request on the mod's GitHub page. I welcome any and all contributions that can help make the mod better for everyone.
 
 ## Credits
 *Bark* was created by KyleTheScientist. 
@@ -73,3 +67,5 @@ Thanks to the Gorilla Tag modding community for their support.
 Special thanks to my little brother Asher for helping me test :)
 
 * [Boxing Gloves model](https://skfb.ly/6XOUS) by Gohar.Munir is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+
+* Orignal Bark Mod by kylethescientist pls show them love!
