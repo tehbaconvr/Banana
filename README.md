@@ -6,7 +6,7 @@
 
 ## Links
 
-* Discord: https://discord.com/invite/K79j2arExP
+* Discord: https://discord.gg/B2MErU9KCp
 * YouTube: https://www.youtube.com/@kylethescientist
 
 ## Features
