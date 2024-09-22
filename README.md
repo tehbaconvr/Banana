@@ -73,4 +73,4 @@ Special thanks to my little brother Asher for helping me test :)
 
 * [Boxing Gloves model](https://skfb.ly/6XOUS) by Gohar.Munir is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
-* Orignal Grate Mod by kylethescientist pls show them love!
+* Orignal Bark Mod by kylethescientist pls show them love!
