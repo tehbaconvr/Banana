@@ -1,14 +1,14 @@
 ﻿using GorillaLocomotion;
-using Bark.Tools;
+using Grate.Tools;
 using UnityEngine;
 using System.Reflection;
-using Bark.Modules.Physics;
-using Bark.GUI;
+using Grate.Modules.Physics;
+using Grate.GUI;
 using BepInEx.Configuration;
 
-namespace Bark.Modules.Movement
+namespace Grate.Modules.Movement
 {
-    public class Wallrun : BarkModule
+    public class Wallrun : GrateModule
     {
         public static readonly string DisplayName = "Wall Run";
         private Vector3 baseGravity;

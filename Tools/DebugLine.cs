@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Bark.Tools
+namespace Grate.Tools
 {
     public class DebugLine : MonoBehaviour
     {

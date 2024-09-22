@@ -1,9 +1,9 @@
-﻿using Bark.Tools;
+﻿using Grate.Tools;
 using System;
 using UnityEngine;
-using Bark.Extensions;
-using Bark.Gestures;
-using Bark.GUI;
+using Grate.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
 using GorillaLocomotion.Gameplay;
 using GorillaLocomotion.Climbing;
 using HarmonyLib;
@@ -11,9 +11,9 @@ using BepInEx.Configuration;
 using UnityEngine.XR;
 using GorillaLocomotion;
 
-namespace Bark.Modules.Movement
+namespace Grate.Modules.Movement
 {
-    public class Zipline : BarkModule
+    public class Zipline : GrateModule
     {
         public static readonly string DisplayName = "Zipline";
         public static GameObject launcherPrefab, ziplinePrefab;

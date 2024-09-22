@@ -1,12 +1,13 @@
-﻿using Bark.GUI;
-using Bark.Tools;
+﻿using Grate.GUI;
+using Grate.Tools;
 using BepInEx.Configuration;
+using GorillaGameModes;
 using GorillaLocomotion;
 using System;
 
-namespace Bark.Modules
+namespace Grate.Modules
 {
-    public class SpeedBoost : BarkModule
+    public class SpeedBoost : GrateModule
     {
         public static readonly string DisplayName = "Speed Boost";
         public static float baseVelocityLimit, scale = 1.5f;
@@ -18,7 +19,7 @@ namespace Bark.Modules
             try
             {
                 progress = "Getting Gamemode\n";
-                var gameMode = GorillaGameManager.instance?.GameMode();
+                var gameMode = GorillaGameManager.instance?.GameModeName();
                 progress = "Checking status\n";
                 if (active && (gameMode is null || gameMode == "NONE" || gameMode == "CASUAL"))
                 {
@@ -30,7 +31,7 @@ namespace Bark.Modules
             catch (Exception e)
             {
                 Logging.Debug("GorillaGameManager.instance is null:", GorillaGameManager.instance is null);
-                Logging.Debug("GorillaGameManager.instance.GameMode() is null:", GorillaGameManager.instance?.GameMode() is null);
+                Logging.Debug("GorillaGameManager.instance.GameMode() is null:", GorillaGameManager.instance?.GameModeName() is null);
                 Logging.Debug(progress);
                 Logging.Exception(e);
             }

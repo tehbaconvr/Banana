@@ -1,13 +1,13 @@
-﻿using Bark.Extensions;
-using Bark.Gestures;
-using Bark.GUI;
-using Bark.Tools;
+﻿using Grate.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
+using Grate.Tools;
 using System;
 using UnityEngine;
 
-namespace Bark.Modules.Misc
+namespace Grate.Modules.Misc
 {
-    public class RatSword : BarkModule
+    public class RatSword : GrateModule
     {
         public static readonly string DisplayName = "Rat Sword";
         private GameObject sword;

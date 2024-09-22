@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace Bark.Extensions
+namespace Grate.Extensions
 {
     public static class TextureExtensions
     {

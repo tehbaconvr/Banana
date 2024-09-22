@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Bark.Extensions
+namespace Grate.Extensions
 {
     public static class StringExtensions
     {

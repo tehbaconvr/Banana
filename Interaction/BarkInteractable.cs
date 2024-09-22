@@ -1,22 +1,22 @@
-﻿using Bark.Gestures;
+﻿using Grate.Gestures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 
-namespace Bark.Interaction
+namespace Grate.Interaction
 {
-    public class BarkInteractable : MonoBehaviour
+    public class GrateInteractable : MonoBehaviour
     {
         GestureTracker gt;
-        public Action<BarkInteractable, BarkInteractor> OnHoverEnter, OnHoverExit;
-        public Action<BarkInteractable, BarkInteractor> OnSelectEnter, OnSelectExit;
-        public Action<BarkInteractable, BarkInteractor> OnActivateEnter, OnActivateExit;
-        public Action<BarkInteractable, BarkInteractor> OnPrimaryEnter, OnPrimaryExit;
-        public BarkInteractor[] validSelectors;
-        public List<BarkInteractor> selectors = new List<BarkInteractor>();
-        public List<BarkInteractor> hoverers = new List<BarkInteractor>();
+        public Action<GrateInteractable, GrateInteractor> OnHoverEnter, OnHoverExit;
+        public Action<GrateInteractable, GrateInteractor> OnSelectEnter, OnSelectExit;
+        public Action<GrateInteractable, GrateInteractor> OnActivateEnter, OnActivateExit;
+        public Action<GrateInteractable, GrateInteractor> OnPrimaryEnter, OnPrimaryExit;
+        public GrateInteractor[] validSelectors;
+        public List<GrateInteractor> selectors = new List<GrateInteractor>();
+        public List<GrateInteractor> hoverers = new List<GrateInteractor>();
         public int priority;
         public bool Activated;
         public bool Primary;
@@ -28,46 +28,46 @@ namespace Bark.Interaction
         protected virtual void Awake()
         {
             gt = GestureTracker.Instance;
-            this.gameObject.layer = BarkInteractor.InteractionLayer;
-            validSelectors = new BarkInteractor[] { gt.leftPalmInteractor, gt.rightPalmInteractor };
+            this.gameObject.layer = GrateInteractor.InteractionLayer;
+            validSelectors = new GrateInteractor[] { gt.leftPalmInteractor, gt.rightPalmInteractor };
         }
 
-        public virtual bool CanBeSelected(BarkInteractor interactor)
+        public virtual bool CanBeSelected(GrateInteractor interactor)
         {
             return enabled && !Selected && validSelectors.Contains(interactor);
         }
 
-        public virtual void OnSelect(BarkInteractor interactor)
+        public virtual void OnSelect(GrateInteractor interactor)
         {
             selectors.Add(interactor);
             OnSelectEnter?.Invoke(this, interactor);
         }
 
-        public virtual void OnDeselect(BarkInteractor interactor)
+        public virtual void OnDeselect(GrateInteractor interactor)
         {
             selectors.Remove(interactor);
             OnSelectExit?.Invoke(this, interactor);
         }
 
-        public virtual void OnActivate(BarkInteractor interactor)
+        public virtual void OnActivate(GrateInteractor interactor)
         {
             Activated = true;
             OnActivateEnter?.Invoke(this, interactor);
         }
 
-        public virtual void OnDeactivate(BarkInteractor interactor)
+        public virtual void OnDeactivate(GrateInteractor interactor)
         {
             Activated = false;
             OnActivateExit?.Invoke(this, interactor);
         }
 
-        public virtual void OnPrimary(BarkInteractor interactor)
+        public virtual void OnPrimary(GrateInteractor interactor)
         {
             Primary = true;
             OnPrimaryEnter?.Invoke(this, interactor);
         }
 
-        public virtual void OnPrimaryReleased(BarkInteractor interactor)
+        public virtual void OnPrimaryReleased(GrateInteractor interactor)
         {
             Primary = false;
             OnPrimaryExit?.Invoke(this, interactor);
@@ -75,7 +75,7 @@ namespace Bark.Interaction
 
         protected virtual void OnTriggerEnter(Collider collider)
         {
-            if (collider.GetComponent<BarkInteractor>() is BarkInteractor interactor)
+            if (collider.GetComponent<GrateInteractor>() is GrateInteractor interactor)
             {
                 if (!CanBeSelected(interactor) || interactor.hovered.Contains(this)) return;
                 if (interactor.Selecting)
@@ -94,7 +94,7 @@ namespace Bark.Interaction
         protected virtual void OnTriggerExit(Collider collider)
         {
             if (!enabled) return;
-            if (collider.GetComponent<BarkInteractor>() is BarkInteractor interactor)
+            if (collider.GetComponent<GrateInteractor>() is GrateInteractor interactor)
             {
                 if (!interactor.hovered.Contains(this)) return;
                 interactor.hovered.Remove(this);

@@ -1,17 +1,17 @@
 ﻿using System;
 using UnityEngine;
-using Bark.Gestures;
-using Bark.GUI;
-using Bark.Tools;
-using Bark.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
+using Grate.Tools;
+using Grate.Extensions;
 using GorillaLocomotion;
 using BepInEx.Configuration;
-using Bark.Interaction;
+using Grate.Interaction;
 using Random = UnityEngine.Random;
 
-namespace Bark.Modules.Movement
+namespace Grate.Modules.Movement
 {
-    public class Rockets : BarkModule
+    public class Rockets : GrateModule
     {
         public static readonly string DisplayName = "Rockets";
         public static Rockets Instance;
@@ -57,7 +57,7 @@ namespace Bark.Modules.Movement
         {
             try
             {
-                rocketObj.name = isLeft ? "Bark Rocket Left" : "Bark Rocket Right";
+                rocketObj.name = isLeft ? "Grate Rocket Left" : "Grate Rocket Right";
                 var rocket = rocketObj.AddComponent<Rocket>().Init(isLeft);
                 rocket.LocalPosition = new Vector3(0.51f, -3, 0f);
                 rocket.LocalRotation = new Vector3(0, 0, -90);
@@ -134,7 +134,7 @@ namespace Bark.Modules.Movement
         }
     }
 
-    public class Rocket : BarkGrabbable
+    public class Rocket : GrateGrabbable
     {
         public float power = 5f, volume = .2f;
         public Vector3 force { get; private set; }
@@ -193,7 +193,7 @@ namespace Bark.Modules.Movement
             ) / 20f) * volume;
         }
 
-        public override void OnDeselect(BarkInteractor interactor)
+        public override void OnDeselect(GrateInteractor interactor)
         {
             base.OnDeselect(interactor);
             rb.velocity = Player.Instance.currentVelocity;
@@ -202,7 +202,7 @@ namespace Bark.Modules.Movement
         public void SetupInteraction()
         {
             this.throwOnDetach = true;
-            gameObject.layer = BarkInteractor.InteractionLayer;
+            gameObject.layer = GrateInteractor.InteractionLayer;
         }
 
         protected override void OnDestroy()

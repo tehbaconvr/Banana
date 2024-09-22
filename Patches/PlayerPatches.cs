@@ -1,12 +1,12 @@
 ﻿using HarmonyLib;
 using GorillaLocomotion;
 using System;
-using Bark.Tools;
-using Bark.Modules.Physics;
+using Grate.Tools;
+using Grate.Modules.Physics;
 using UnityEngine;
-using Bark.Gestures;
+using Grate.Gestures;
 
-namespace Bark.Patches
+namespace Grate.Patches
 {
     [HarmonyPatch(typeof(Player))]
     [HarmonyPatch("LateUpdate", MethodType.Normal)]

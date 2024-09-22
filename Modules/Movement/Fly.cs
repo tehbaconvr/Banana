@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using Player = GorillaLocomotion.Player;
-using Bark.GUI;
+using Grate.GUI;
 using BepInEx.Configuration;
-using Bark.Extensions;
-using Bark.Gestures;
+using Grate.Extensions;
+using Grate.Gestures;
 
-namespace Bark.Modules.Movement
+namespace Grate.Modules.Movement
 {
-    public class Fly : BarkModule
+    public class Fly : GrateModule
     {
         public static readonly string DisplayName = "Fly";
         float speedScale = 10, acceleration = .01f;
@@ -17,8 +17,8 @@ namespace Bark.Modules.Movement
         {
             // nullify gravity by adding it's negative value to the player's velocity
             var rb = Player.Instance.bodyCollider.attachedRigidbody;
-            if (BarkModule.enabledModules.ContainsKey(Bubble.DisplayName)
-                && !BarkModule.enabledModules[Bubble.DisplayName])
+            if (GrateModule.enabledModules.ContainsKey(Bubble.DisplayName)
+                && !GrateModule.enabledModules[Bubble.DisplayName])
                 rb.AddForce(-UnityEngine.Physics.gravity * rb.mass * Player.Instance.scale);
 
             xz = GestureTracker.Instance.leftStickAxis.GetValue();

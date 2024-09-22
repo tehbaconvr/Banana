@@ -3,9 +3,9 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-using Bark.Extensions;
+using Grate.Extensions;
 
-namespace Bark.Tools
+namespace Grate.Tools
 {
     public static class TextureRipper
     {

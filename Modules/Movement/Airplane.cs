@@ -1,12 +1,12 @@
 ﻿using GorillaLocomotion;
-using Bark.Gestures;
-using Bark.GUI;
+using Grate.Gestures;
+using Grate.GUI;
 using UnityEngine;
 using BepInEx.Configuration;
 
-namespace Bark.Modules.Movement
+namespace Grate.Modules.Movement
 {
-    public class Airplane : BarkModule
+    public class Airplane : GrateModule
     {
         public static readonly string DisplayName = "Airplane";
         float speedScale = 10f, acceleration = .1f;

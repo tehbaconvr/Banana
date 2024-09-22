@@ -1,14 +1,14 @@
 ﻿using HarmonyLib;
 using GorillaLocomotion;
 using System;
-using Bark.Tools;
-using Bark.Modules.Physics;
+using Grate.Tools;
+using Grate.Modules.Physics;
 using UnityEngine;
 using GorillaLocomotion.Gameplay;
 using GorillaLocomotion.Climbing;
-using Bark.Modules.Movement;
+using Grate.Modules.Movement;
 
-namespace Bark.Patches
+namespace Grate.Patches
 {
     [HarmonyPatch(typeof(GorillaZipline))]
     [HarmonyPatch("Update", MethodType.Normal)]

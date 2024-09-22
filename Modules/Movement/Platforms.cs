@@ -1,18 +1,18 @@
 ﻿using GorillaLocomotion;
-using Bark.Tools;
+using Grate.Tools;
 using System;
 using UnityEngine;
 using UnityEngine.XR;
-using Bark.Extensions;
-using Bark.Gestures;
-using Bark.GUI;
+using Grate.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
 using BepInEx.Configuration;
 using GorillaLocomotion.Climbing;
 using HarmonyLib;
-using Bark.Modules.Physics;
-using Bark.Networking;
+using Grate.Modules.Physics;
+using Grate.Networking;
 
-namespace Bark.Modules.Movement
+namespace Grate.Modules.Movement
 {
     public class Platform : MonoBehaviour
     {
@@ -33,7 +33,7 @@ namespace Bark.Modules.Movement
             try
             {
                 this.isLeft = isLeft;
-                this.name = "Bark Platform " + (isLeft ? "Left" : "Right");
+                this.name = "Grate Platform " + (isLeft ? "Left" : "Right");
                 this.Scale = 1;
                 foreach (Transform child in this.transform)
                     child.gameObject.AddComponent<GorillaSurfaceOverride>().overrideIndex = 110;
@@ -137,7 +137,7 @@ namespace Bark.Modules.Movement
         }
     }
 
-    public class Platforms : BarkModule
+    public class Platforms : GrateModule
     {
         public static readonly string DisplayName = "Platforms";
         public static GameObject platformPrefab;
@@ -148,7 +148,7 @@ namespace Bark.Modules.Movement
         {
             if (!platformPrefab)
             {
-                platformPrefab = Plugin.assetBundle.LoadAsset<GameObject>("Bark Platform");
+                platformPrefab = Plugin.assetBundle.LoadAsset<GameObject>("Grate Platform");
             }
         }
 
@@ -214,8 +214,14 @@ namespace Bark.Modules.Movement
 
         protected override void Cleanup()
         {
-            left.gameObject?.Obliterate();
-            right.gameObject?.Obliterate();
+            if (left != null)
+            {
+                left.gameObject?.Obliterate();
+            }
+            if (right != null)
+            {
+                right.gameObject?.Obliterate();
+            }
             Unsub();
 
         }
@@ -389,8 +395,14 @@ namespace Bark.Modules.Movement
         void OnDestroy()
         {
             Logging.Debug("Networked player", networkedPlayer.owner.NickName, "turned off platforms");
-            platformLeft?.Obliterate();
-            platformRight?.Obliterate();
+            if (platformLeft != null)
+            {
+                platformLeft?.Obliterate();
+            }
+            if (platformRight != null)
+            {
+                platformRight?.Obliterate();
+            }
             networkedPlayer.OnGripPressed -= OnGripPressed;
             networkedPlayer.OnGripReleased -= OnGripReleased;
         }

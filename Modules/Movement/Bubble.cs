@@ -1,15 +1,15 @@
 ﻿using GorillaLocomotion;
-using Bark.Tools;
+using Grate.Tools;
 using System;
 using UnityEngine;
-using Bark.Extensions;
-using Bark.Gestures;
-using Bark.GUI;
+using Grate.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
 using BepInEx.Configuration;
-using Bark.Networking;
-using NetworkPlayer = Photon.Realtime.Player;
+using Grate.Networking;
+using NetworkPlayer = NetPlayer;
 
-namespace Bark.Modules.Movement
+namespace Grate.Modules.Movement
 {
 
     public class BubbleMarker : MonoBehaviour
@@ -20,7 +20,7 @@ namespace Bark.Modules.Movement
             bubble = Instantiate(Bubble.bubblePrefab);
             bubble.transform.SetParent(transform, false);
             bubble.transform.localPosition = new Vector3(0, -.1f, 0);
-            bubble.gameObject.layer = BarkInteractor.InteractionLayer;
+            bubble.gameObject.layer = GrateInteractor.InteractionLayer;
         }
 
         void OnDestroy()
@@ -28,7 +28,7 @@ namespace Bark.Modules.Movement
             Destroy(bubble);
         }
     }
-    public class Bubble : BarkModule
+    public class Bubble : GrateModule
     {
         public static readonly string DisplayName = "Bubble";
         public static GameObject bubblePrefab;

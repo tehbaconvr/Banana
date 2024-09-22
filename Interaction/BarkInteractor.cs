@@ -1,21 +1,21 @@
 ﻿using System;
 using UnityEngine;
-using Bark.Tools;
-using Bark.Interaction;
+using Grate.Tools;
+using Grate.Interaction;
 using System.Collections.Generic;
 using UnityEngine.XR;
 
 
-namespace Bark.Gestures
+namespace Grate.Gestures
 {
-    public class BarkInteractor : MonoBehaviour
+    public class GrateInteractor : MonoBehaviour
     {
         public static string InteractionLayerName = "TransparentFX";
         public static int InteractionLayer = LayerMask.NameToLayer(InteractionLayerName);
         public static int InteractionLayerMask = LayerMask.GetMask(InteractionLayerName);
-        public List<BarkInteractable>
-            hovered = new List<BarkInteractable>(),
-            selected = new List<BarkInteractable>();
+        public List<GrateInteractable>
+            hovered = new List<GrateInteractable>(),
+            selected = new List<GrateInteractable>();
         public InputDevice device;
         public XRNode node;
         public bool IsLeft { get; protected set; }
@@ -52,7 +52,7 @@ namespace Bark.Gestures
             catch (Exception e) { Logging.Exception(e); }
         }
 
-        public void Select(BarkInteractable interactable)
+        public void Select(GrateInteractable interactable)
         {
             try
             {
@@ -70,12 +70,12 @@ namespace Bark.Gestures
             catch (Exception e) { Logging.Exception(e); }
         }
 
-        public void Deselect(BarkInteractable interactable)
+        public void Deselect(GrateInteractable interactable)
         {
             interactable.OnDeselect(this);
         }
 
-        public void Hover(BarkInteractable interactable)
+        public void Hover(GrateInteractable interactable)
         {
             hovered.Add(interactable);
         }
@@ -84,7 +84,7 @@ namespace Bark.Gestures
         {
             if (Selecting) return;
             Selecting = true;
-            BarkInteractable selected = null;
+            GrateInteractable selected = null;
             foreach (var interactable in hovered)
             {
                 if (interactable.CanBeSelected(this))

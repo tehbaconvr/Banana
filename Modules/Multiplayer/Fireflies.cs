@@ -1,15 +1,15 @@
-﻿using Bark.Extensions;
-using Bark.Gestures;
-using Bark.GUI;
-using Bark.Modules.Movement;
-using Bark.Patches;
-using Bark.Tools;
+﻿using Grate.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
+using Grate.Modules.Movement;
+using Grate.Patches;
+using Grate.Tools;
 using GorillaLocomotion;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Bark.Modules.Multiplayer
+namespace Grate.Modules.Multiplayer
 {
     public class Firefly : MonoBehaviour
     {
@@ -126,7 +126,7 @@ namespace Bark.Modules.Multiplayer
         }
     }
 
-    public class Fireflies : BarkModule
+    public class Fireflies : GrateModule
     {
         public static readonly string DisplayName = "Fireflies";
         public static List<Firefly> fireflies = new List<Firefly>();

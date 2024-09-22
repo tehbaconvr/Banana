@@ -1,10 +1,10 @@
 ﻿using GorillaLocomotion;
-using Bark.Extensions;
-using Bark.Gestures;
-using Bark.GUI;
-using Bark.Patches;
-using Bark.Tools;
-using Bark.Modules.Physics;
+using Grate.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
+using Grate.Patches;
+using Grate.Tools;
+using Grate.Modules.Physics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,9 +12,9 @@ using UnityEngine;
 using UnityEngine.XR;
 using BepInEx.Configuration;
 
-namespace Bark.Modules.Teleportation
+namespace Grate.Modules.Teleportation
 {
-    public class Checkpoint : BarkModule
+    public class Checkpoint : GrateModule
     {
         public static readonly string DisplayName = "Checkpoint";
         public static Checkpoint Instance;

@@ -1,18 +1,18 @@
-﻿using Bark.GUI;
+﻿using Grate.GUI;
 using GorillaNetworking;
 
-namespace Bark.Modules.Misc
+namespace Grate.Modules.Misc
 {
-    public class Lobby : BarkModule
+    public class Lobby : GrateModule
     {
 
-        public static readonly string DisplayName = "Join Bark Code";
+        public static readonly string DisplayName = "Join Grate Code";
 
         protected override void OnEnable()
         {
             if (!MenuController.Instance.Built) return;
             base.OnEnable();
-            Plugin.Instance.JoinLobby("BARK_MOD", "MODDED_MODDED_CASUALCASUAL");
+            Plugin.Instance.JoinLobby("GRATE_MOD", "MODDED_MODDED_CASUALCASUAL");
             this.enabled = false;
         }
         public override string GetDisplayName()
@@ -22,7 +22,7 @@ namespace Bark.Modules.Misc
 
         public override string Tutorial()
         {
-            return "Joins the official Bark Mod code";
+            return "Joins the official Grate Mod code";
         }
 
         protected override void Cleanup() { }   

@@ -4,8 +4,8 @@
 
 ### Features
 - Added the **Fireflies** mod which allows you to summon a firefly that will track a player in the lobby.
-- Added the **Join Bark Code** button which will let you join a private code for Bark users.
-- You can now summon Bark using the **B** button on your keyboard.
+- Added the **Join Grate Code** button which will let you join a private code for Grate users.
+- You can now summon Grate using the **B** button on your keyboard.
 - Added some Christmas lights to the menu
 
 ### Fixed 
@@ -104,7 +104,7 @@ Features
         -  `Charge Time` - How long it takes to charge the teleport
 
 Changes
-- Going forward there will be 2 releases for Bark; One with and one without the Computer Interface dependency. This way players
+- Going forward there will be 2 releases for Grate; One with and one without the Computer Interface dependency. This way players
 can still use the mod even if CI is broken.
 
 Fixes
@@ -218,13 +218,13 @@ Changes
 Fixes
 - Fixed NoClip and Piggyback warping you into the floor
 - The page buttons can no longer be pressed on accident when you throw the menu
-- Fixed Unity errors being thrown by the BarkModule class
+- Fixed Unity errors being thrown by the GrateModule class
 - Fixed Double Jump tutorial
 
 ## 1.1.1 (2023-Apr-19) - No Collide Fix
 
 Fixes
-* Resolved [Issue #5](https://github.com/KyleTheScientist/Bark/issues/5)
+* Resolved [Issue #5](https://github.com/KyleTheScientist/Grate/issues/5)
 * Fixed scaling issues with the Grappling Hooks module
 
 Changes
@@ -240,7 +240,7 @@ Changes
 * Reduced the wind-up time on the teleport from 2 seconds to 1
 
 Fixes
-* Resolved [Issue #1](https://github.com/KyleTheScientist/Bark/issues/1)
+* Resolved [Issue #1](https://github.com/KyleTheScientist/Grate/issues/1)
 
 Removed
 * Temporarily removed the Double Jump module (it should be back eventually, I just want to rework it a bit).

@@ -1,19 +1,19 @@
 ﻿using System;
 using UnityEngine;
-using Bark.Gestures;
-using Bark.GUI;
-using Bark.Tools;
-using Bark.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
+using Grate.Tools;
+using Grate.Extensions;
 using GorillaLocomotion;
 using BepInEx.Configuration;
-using Bark.Interaction;
+using Grate.Interaction;
 using System.Collections.Generic;
-using Bark.Networking;
+using Grate.Networking;
 using HarmonyLib;
 
-namespace Bark.Modules.Physics
+namespace Grate.Modules.Physics
 {
-    public class Potions : BarkModule
+    public class Potions : GrateModule
     {
         public static readonly string DisplayName = "Potions";
         private GameObject bottlePrefab, shrinkPotion, growPotion;
@@ -26,7 +26,7 @@ namespace Bark.Modules.Physics
         public static bool active;
 
         // Networking
-        public static readonly string playerSizeKey = "BarkPlayerSize";
+        public static readonly string playerSizeKey = "GratePlayerSize";
         public static Dictionary<VRRig, SizeChanger> sizeChangers = new Dictionary<VRRig, SizeChanger>();
 
         void Awake()
@@ -67,7 +67,7 @@ namespace Bark.Modules.Physics
                     bottlePrefab = Plugin.assetBundle.LoadAsset<GameObject>("Potion Bottle");
 
                 NetworkPropertyHandler.Instance?.ChangeProperty(playerSizeKey, Player.Instance.scale);
-                sizeChanger = new GameObject("Bark Size Changer").AddComponent<SizeChanger>();
+                sizeChanger = new GameObject("Grate Size Changer").AddComponent<SizeChanger>();
                 sizeChangerTraverse = Traverse.Create(sizeChanger);
                 minScale = sizeChangerTraverse.Field("minScale");
                 maxScale = sizeChangerTraverse.Field("maxScale");
@@ -105,7 +105,7 @@ namespace Bark.Modules.Physics
                 holster.localPosition = offset;
 
                 var sizePotion = potion.AddComponent<SizePotion>();
-                sizePotion.name = isLeft ? "Bark Shrink Potion" : "Bark Grow Potion";
+                sizePotion.name = isLeft ? "Grate Shrink Potion" : "Grate Grow Potion";
                 sizePotion.Holster(holster);
                 sizePotion.OnDrink += DrinkPotion;
                 sizePotion.GetComponent<Renderer>().material = isLeft ? shrinkMaterial : growMaterial;
@@ -258,7 +258,7 @@ namespace Bark.Modules.Physics
 
         public static SizeChanger CreateSizeChanger(float scale)
         {
-            var sizeChanger = new GameObject("Bark Size Changer").AddComponent<SizeChanger>();
+            var sizeChanger = new GameObject("Grate Size Changer").AddComponent<SizeChanger>();
             var sizeChangerTraverse = Traverse.Create(sizeChanger);
             var minScale = sizeChangerTraverse.Field("minScale");
             var maxScale = sizeChangerTraverse.Field("maxScale");
@@ -271,7 +271,7 @@ namespace Bark.Modules.Physics
     }
 
 
-    public class SizePotion : BarkGrabbable
+    public class SizePotion : GrateGrabbable
     {
         public Transform holster;
         Vector3 corkOffset, corkScale;
@@ -356,20 +356,20 @@ namespace Bark.Modules.Physics
             return cork.transform.parent == this.transform;
         }
 
-        public override void OnSelect(BarkInteractor interactor)
+        public override void OnSelect(GrateInteractor interactor)
         {
             base.OnSelect(interactor);
             if (cork)
                 cork.enabled = true;
         }
 
-        public override void OnDeselect(BarkInteractor interactor)
+        public override void OnDeselect(GrateInteractor interactor)
         {
             base.OnDeselect(interactor);
             Holster(this.holster);
         }
 
-        public override void OnPrimaryReleased(BarkInteractor interactor)
+        public override void OnPrimaryReleased(GrateInteractor interactor)
         {
             base.OnPrimaryReleased(interactor);
             if (IsCorked())
@@ -379,7 +379,7 @@ namespace Bark.Modules.Physics
             }
         }
 
-        public override void OnActivate(BarkInteractor interactor)
+        public override void OnActivate(GrateInteractor interactor)
         {
             base.OnActivate(interactor);
         }
@@ -410,7 +410,7 @@ namespace Bark.Modules.Physics
         }
     }
 
-    public class Cork : BarkGrabbable
+    public class Cork : GrateGrabbable
     {
 
         public Rigidbody rb;
@@ -427,7 +427,7 @@ namespace Bark.Modules.Physics
             popSource = GetComponent<AudioSource>();
         }
 
-        public override void OnSelect(BarkInteractor interactor)
+        public override void OnSelect(GrateInteractor interactor)
         {
             base.OnSelect(interactor);
             if (shouldPlayPopSound)

@@ -1,10 +1,10 @@
-﻿using Bark.GUI;
+﻿using Grate.GUI;
 using BepInEx.Configuration;
 using UnityEngine;
 
-namespace Bark.Modules.Physics
+namespace Grate.Modules.Physics
 {
-    public class LowGravity : BarkModule
+    public class LowGravity : GrateModule
     {
         public static readonly string DisplayName = "Gravity";
         public static LowGravity Instance;

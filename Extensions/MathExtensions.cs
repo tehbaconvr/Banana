@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Bark.Extensions
+namespace Grate.Extensions
 {
     public static class MathExtensions
     {

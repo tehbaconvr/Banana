@@ -1,16 +1,16 @@
-﻿using Bark.Tools;
+﻿using Grate.Tools;
 using System;
 using UnityEngine;
-using Bark.Extensions;
-using Bark.Gestures;
-using Bark.GUI;
+using Grate.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
 using GorillaLocomotion.Climbing;
 using BepInEx.Configuration;
 using UnityEngine.XR;
 
-namespace Bark.Modules.Movement
+namespace Grate.Modules.Movement
 {
-    public class NailGun : BarkModule
+    public class NailGun : GrateModule
     {
         public static readonly string DisplayName = "Nail Gun";
         public static GameObject launcherPrefab, nailPrefab;

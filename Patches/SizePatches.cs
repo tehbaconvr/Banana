@@ -1,13 +1,13 @@
 ﻿using HarmonyLib;
 using GorillaLocomotion;
 using System;
-using Bark.Tools;
-using Bark.Modules.Physics;
+using Grate.Tools;
+using Grate.Modules.Physics;
 using UnityEngine;
-using Bark.Extensions;
+using Grate.Extensions;
 using System.Runtime.CompilerServices;
 
-namespace Bark.Patches
+namespace Grate.Patches
 {
     [HarmonyPatch(typeof(SizeManager))]
     [HarmonyPatch("ControllingChanger", MethodType.Normal)]

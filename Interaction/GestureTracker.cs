@@ -1,5 +1,5 @@
-﻿using Bark.Extensions;
-using Bark.Tools;
+﻿using Grate.Extensions;
+using Grate.Tools;
 using GorillaLocomotion;
 using HarmonyLib;
 using System;
@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
-namespace Bark.Gestures
+namespace Grate.Gestures
 {
     public class GestureTracker : MonoBehaviour
     {
@@ -37,7 +37,7 @@ namespace Bark.Gestures
 
         public BodyVectors leftHandVectors, rightHandVectors, headVectors;
 
-        public BarkInteractor
+        public GrateInteractor
             leftPalmInteractor, rightPalmInteractor,
             leftPointerInteractor, rightPointerInteractor;
 
@@ -46,7 +46,7 @@ namespace Bark.Gestures
         public const string localRigPath =
             "Player Objects/Local VRRig/Local Gorilla Player";
         public const string palmPath =
-            "/rig/body/shoulder.{0}/upper_arm.{0}/forearm.{0}/hand.{0}/palm.01.{0}";
+            "/RigAnchor/rig/body/shoulder.{0}/upper_arm.{0}/forearm.{0}/hand.{0}/palm.01.{0}";
         public const string pointerFingerPath =
             palmPath + "/f_index.01.{0}/f_index.02.{0}/f_index.03.{0}";
         public const string thumbPath =
@@ -288,10 +288,10 @@ namespace Bark.Gestures
             rightThumbTransform = GameObject.Find(string.Format(localRigPath + thumbPath, "R")).transform;
         }
 
-        public BarkInteractor CreateInteractor(string name, Transform parent, float scale)
+        public GrateInteractor CreateInteractor(string name, Transform parent, float scale)
         {
             var obj = new GameObject(name);
-            var interactor = obj.AddComponent<BarkInteractor>();
+            var interactor = obj.AddComponent<GrateInteractor>();
             obj.transform.SetParent(parent, false);
             obj.transform.localScale = Vector3.one * scale;
             return interactor;

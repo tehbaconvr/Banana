@@ -1,7 +1,7 @@
-﻿using Bark.Tools;
+﻿using Grate.Tools;
 using UnityEngine;
 
-namespace Bark.Extensions
+namespace Grate.Extensions
 {
     public static class GameObjectExtensions
     {

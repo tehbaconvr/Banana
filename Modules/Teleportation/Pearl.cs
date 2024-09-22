@@ -1,17 +1,17 @@
 ﻿using System;
 using UnityEngine;
-using Bark.Gestures;
-using Bark.GUI;
-using Bark.Tools;
-using Bark.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
+using Grate.Tools;
+using Grate.Extensions;
 using GorillaLocomotion;
 using BepInEx.Configuration;
-using Bark.Interaction;
-using Bark.Patches;
+using Grate.Interaction;
+using Grate.Patches;
 
-namespace Bark.Modules.Teleportation
+namespace Grate.Modules.Teleportation
 {
-    public class Pearl : BarkModule
+    public class Pearl : GrateModule
     {
         public static readonly string DisplayName = "Pearl";
         public static Pearl Instance;
@@ -53,7 +53,7 @@ namespace Bark.Modules.Teleportation
         {
             try
             {
-                pearlObj.name = "Bark Pearl";
+                pearlObj.name = "Grate Pearl";
                 var pearl = pearlObj.AddComponent<ThrowablePearl>();
                 return pearl;
             }
@@ -108,7 +108,7 @@ namespace Bark.Modules.Teleportation
         }
     }
 
-    public class ThrowablePearl : BarkGrabbable
+    public class ThrowablePearl : GrateGrabbable
     {
         GestureTracker gt;
         Rigidbody rigidbody;
@@ -130,7 +130,7 @@ namespace Bark.Modules.Teleportation
                 this.monkeMat = GetComponentInChildren<SkinnedMeshRenderer>().material;
                 this.trailMat = GetComponentInChildren<ParticleSystemRenderer>().material;
                 this.trail = GetComponentInChildren<ParticleSystem>();
-                gameObject.layer = BarkInteractor.InteractionLayer;
+                gameObject.layer = GrateInteractor.InteractionLayer;
                 rigidbody = gameObject.GetOrAddComponent<Rigidbody>();
                 rigidbody.useGravity = true;
                 gt = GestureTracker.Instance;
@@ -190,7 +190,7 @@ namespace Bark.Modules.Teleportation
             }
         }
 
-        public override void OnDeselect(BarkInteractor interactor)
+        public override void OnDeselect(GrateInteractor interactor)
         {
             base.OnDeselect(interactor);
             this.thrown = true;

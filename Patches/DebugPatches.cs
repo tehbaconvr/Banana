@@ -1,11 +1,11 @@
 ﻿using HarmonyLib;
 using System;
-using Bark.Tools;
+using Grate.Tools;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 
-namespace Bark.Patches
+namespace Grate.Patches
 {
     public static class DebugPatches
     {

@@ -1,15 +1,15 @@
-﻿using Bark.Tools;
+﻿using Grate.Tools;
 using System;
 using UnityEngine;
-using Bark.Extensions;
-using Bark.Gestures;
-using Bark.GUI;
+using Grate.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
 using GorillaLocomotion.Climbing;
-using Sound = Bark.Tools.Sounds.Sound;
+using Sound = Grate.Tools.Sounds.Sound;
 
-namespace Bark.Modules.Movement
+namespace Grate.Modules.Movement
 {
-    public class Climb : BarkModule
+    public class Climb : GrateModule
     {
         public static readonly string DisplayName = "Climb";
         public GameObject climbableLeft, climbableRight;
@@ -36,7 +36,7 @@ namespace Bark.Modules.Movement
         public GameObject CreateClimbable(InputTracker<float> grip)
         {
             var climbable = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            climbable.name = "Bark Climb Obj";
+            climbable.name = "Grate Climb Obj";
             climbable.AddComponent<GorillaClimbable>();
             climbable.layer = LayerMask.NameToLayer("GorillaInteractable");
             climbable.GetComponent<Renderer>().enabled = false;

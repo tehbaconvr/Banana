@@ -1,17 +1,17 @@
 ﻿using GorillaLocomotion;
-using Bark.Tools;
+using Grate.Tools;
 using System;
 using UnityEngine;
-using Bark.Extensions;
-using Bark.Gestures;
-using Bark.GUI;
+using Grate.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
 using BepInEx.Configuration;
 using UnityEngine.XR;
-using Bark.Patches;
+using Grate.Patches;
 
-namespace Bark.Modules.Teleportation
+namespace Grate.Modules.Teleportation
 {
-    public class Portal : BarkModule
+    public class Portal : GrateModule
     {
         public static readonly string DisplayName = "Portals";
         public static GameObject launcherPrefab, portalPrefab;

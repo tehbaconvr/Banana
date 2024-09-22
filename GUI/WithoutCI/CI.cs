@@ -1,4 +1,4 @@
-﻿namespace Bark.GUI
+﻿namespace Grate.GUI
 {
     public static class CI
     {

@@ -1,18 +1,18 @@
 ﻿using GorillaLocomotion;
-using Bark.Extensions;
-using Bark.Gestures;
-using Bark.GUI;
-using Bark.Patches;
-using Bark.Tools;
+using Grate.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
+using Grate.Patches;
+using Grate.Tools;
 using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using BepInEx.Configuration;
 
-namespace Bark.Modules
+namespace Grate.Modules
 {
-    public class Teleport : BarkModule
+    public class Teleport : GrateModule
     {
         public static readonly string DisplayName = "Teleport";
         public static readonly int layerMask = LayerMask.GetMask("Default", "Gorilla Object");

@@ -1,10 +1,10 @@
-﻿using Bark.GUI;
-using Bark.Patches;
+﻿using Grate.GUI;
+using Grate.Patches;
 using BepInEx.Configuration;
 
-namespace Bark.Modules.Physics
+namespace Grate.Modules.Physics
 {
-    public class SlipperyHands : BarkModule
+    public class SlipperyHands : GrateModule
     {
         public static readonly string DisplayName = "Slippery Hands";
         public static SlipperyHands Instance;

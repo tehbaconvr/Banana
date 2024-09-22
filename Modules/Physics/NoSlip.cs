@@ -1,12 +1,12 @@
-﻿using Bark.GUI;
-using Bark.Patches;
+﻿using Grate.GUI;
+using Grate.Patches;
 using BepInEx.Configuration;
 using GorillaLocomotion;
 using UnityEngine;
 
-namespace Bark.Modules.Physics
+namespace Grate.Modules.Physics
 {
-    public class NoSlip: BarkModule
+    public class NoSlip: GrateModule
     {
         public static readonly string DisplayName = "No Slip";
         public static NoSlip Instance;

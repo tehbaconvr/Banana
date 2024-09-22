@@ -1,15 +1,15 @@
-﻿using Bark.Extensions;
-using Bark.GUI;
-using Bark.Tools;
+﻿using Grate.Extensions;
+using Grate.GUI;
+using Grate.Tools;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using GorillaLocomotion;
 
-namespace Bark.Modules.Multiplayer
+namespace Grate.Modules.Multiplayer
 {
 
-    public class XRay : BarkModule
+    public class XRay : GrateModule
     {
         public static readonly string DisplayName = "X-Ray";
         List<XRayMarker> markers;
@@ -21,7 +21,7 @@ namespace Bark.Modules.Multiplayer
                 try
                 {
                     if (!rig?.PhotonView()) continue;
-                    if ((bool)rig?.PhotonView()?.Owner?.IsLocal) continue;
+                    if ((bool)rig?.OwningNetPlayer?.IsLocal) continue;
 
                     var marker = rig.gameObject.GetComponent<XRayMarker>();
                     if (!marker)
@@ -34,7 +34,7 @@ namespace Bark.Modules.Multiplayer
                     Logging.Exception(e);
                     Logging.Debug("rig is null:", rig is null);
                     Logging.Debug("rig?.PhotonView() is null:", rig?.PhotonView() is null);
-                    Logging.Debug("rig?.PhotonView()?.Owner is null:", rig?.PhotonView()?.Owner is null);
+                    Logging.Debug("rig?.OwningNetPlayer is null:", rig?.OwningNetPlayer is null);
                     Logging.Debug("rig?.gameObject is null:", rig?.gameObject is null);
                 }
             }

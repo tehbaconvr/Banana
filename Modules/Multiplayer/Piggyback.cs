@@ -1,18 +1,18 @@
-﻿using Bark.GUI;
-using Bark.Gestures;
-using Bark.Patches;
-using Bark.Modules.Physics;
+﻿using Grate.GUI;
+using Grate.Gestures;
+using Grate.Patches;
+using Grate.Modules.Physics;
 using GorillaLocomotion;
 using UnityEngine;
 using UnityEngine.XR;
-using Bark.Extensions;
-using Bark.Tools;
+using Grate.Extensions;
+using Grate.Tools;
 using System;
-using Bark.Networking;
+using Grate.Networking;
 
-namespace Bark.Modules.Multiplayer
+namespace Grate.Modules.Multiplayer
 {
-    public class Piggyback : BarkModule
+    public class Piggyback : GrateModule
     {
         public static readonly string DisplayName = "Piggyback";
         public static bool mounted;
@@ -87,7 +87,7 @@ namespace Bark.Modules.Multiplayer
             {
                 try
                 {
-                    if (rig.PhotonView().Owner.IsLocal)
+                    if (rig.OwningNetPlayer.IsLocal)
                     {
                         continue;
                     }

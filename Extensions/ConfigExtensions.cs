@@ -2,7 +2,7 @@
 using UnityEngine;
 using System;
 
-namespace Bark.Extensions
+namespace Grate.Extensions
 {
     public static class ConfigExtensions
     {

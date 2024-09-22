@@ -1,11 +1,11 @@
-﻿using Bark.GUI;
+﻿using Grate.GUI;
 using BepInEx.Configuration;
 using GorillaLocomotion;
 using UnityEngine;
 
-namespace Bark.Modules.Physics
+namespace Grate.Modules.Physics
 {
-    public class SlowMotion : BarkModule
+    public class SlowMotion : GrateModule
     {
         public static readonly string DisplayName = "Slow motion";
         public static SlowMotion Instance;

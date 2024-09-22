@@ -1,15 +1,15 @@
-﻿using Bark.Extensions;
-using Bark.Gestures;
-using Bark.GUI;
-using Bark.Networking;
-using Bark.Tools;
+﻿using Grate.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
+using Grate.Networking;
+using Grate.Tools;
 using BepInEx.Configuration;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using NetworkPlayer = Photon.Realtime.Player;
+using NetworkPlayer = NetPlayer;
 using Player = GorillaLocomotion.Player;
-namespace Bark.Modules.Multiplayer
+namespace Grate.Modules.Multiplayer
 {
     public class BoxingGlove : MonoBehaviour
     {
@@ -25,7 +25,7 @@ namespace Bark.Modules.Multiplayer
         }
     }
 
-    public class Boxing : BarkModule
+    public class Boxing : GrateModule
     {
         public static readonly string DisplayName = "Boxing";
         public float forceMultiplier = 50;
@@ -43,9 +43,9 @@ namespace Bark.Modules.Multiplayer
             {
                 ReloadConfiguration();
                 var capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-                capsule.name = "BarkPunchDetector";
+                capsule.name = "GratePunchDetector";
                 capsule.transform.SetParent(Player.Instance.bodyCollider.transform, false);
-                capsule.layer = BarkInteractor.InteractionLayer;
+                capsule.layer = GrateInteractor.InteractionLayer;
                 capsule.GetComponent<MeshRenderer>().enabled = false;
 
                 punchCollider = capsule.GetComponent<Collider>();
@@ -94,7 +94,7 @@ namespace Bark.Modules.Multiplayer
 
             foreach (BoxingGlove g in gloves)
             {
-                if (g && g?.rig?.PhotonView()?.Owner == player)
+                if (g && g?.rig.OwningNetPlayer == player)
                 {
                     g?.gameObject.Obliterate();
                     Logging.Debug($"Destroyed {player.NickName}'s gloves.");
@@ -120,8 +120,8 @@ namespace Bark.Modules.Multiplayer
                 Logging.Debug($"Giving gloves to {player.NickName}");
                 foreach (var rig in GorillaParent.instance.vrrigs)
                 {
-                    Logging.Debug($"    {rig?.PhotonView()?.Owner?.NickName} == {player?.NickName}: {rig?.PhotonView()?.Owner?.UserId == player.UserId}");
-                    if (rig?.PhotonView() && rig.PhotonView().Owner == player)
+                    Logging.Debug($"    {rig?.OwningNetPlayer?.NickName} == {player?.NickName}: {rig?.OwningNetPlayer?.UserId == player.UserId}");
+                    if (rig?.PhotonView() && rig.OwningNetPlayer == player)
                     {
                         GiveGlovesTo(rig);
                     }
@@ -136,7 +136,7 @@ namespace Bark.Modules.Multiplayer
             {
                 try
                 {
-                    if (rig.PhotonView().Owner.IsLocal || glovedRigs.Contains(rig)) continue;
+                    if (rig.OwningNetPlayer.IsLocal || glovedRigs.Contains(rig)) continue;
                     GiveGlovesTo(rig);
                 }
                 catch (Exception e)
@@ -156,7 +156,7 @@ namespace Bark.Modules.Multiplayer
             var righty = CreateGlove(rig.rightHandTransform, false);
             righty.rig = rig;
             gloves.Add(righty);
-            Logging.Debug("Gave gloves to", rig.PhotonView().Owner.NickName);
+            Logging.Debug("Gave gloves to", rig.OwningNetPlayer.NickName);
 
         }
 
@@ -168,9 +168,9 @@ namespace Bark.Modules.Multiplayer
             glove.transform.SetParent(parent, false);
             float x = isLeft ? 1 : -1;
             glove.transform.localScale = new Vector3(x, 1, 1);
-            glove.layer = BarkInteractor.InteractionLayer;
+            glove.layer = GrateInteractor.InteractionLayer;
             foreach (Transform child in glove.transform)
-                child.gameObject.layer = BarkInteractor.InteractionLayer;
+                child.gameObject.layer = GrateInteractor.InteractionLayer;
             return glove.AddComponent<BoxingGlove>();
         }
 

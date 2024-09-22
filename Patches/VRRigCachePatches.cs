@@ -1,16 +1,16 @@
 ﻿using HarmonyLib;
 using GorillaLocomotion;
 using System;
-using Bark.Tools;
-using Bark.Modules.Physics;
+using Grate.Tools;
+using Grate.Modules.Physics;
 using UnityEngine;
-using Bark.Gestures;
+using Grate.Gestures;
 using Photon.Pun;
 using System.Collections.Generic;
 using System.Reflection;
-using Bark.Extensions;
+using Grate.Extensions;
 
-namespace Bark.Patches
+namespace Grate.Patches
 {
     [HarmonyPatch]
     public class VRRigCachePatches

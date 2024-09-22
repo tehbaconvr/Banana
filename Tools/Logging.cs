@@ -1,16 +1,16 @@
-﻿using Bark.GUI;
+﻿using Grate.GUI;
 using BepInEx.Logging;
 using System;
 using System.Diagnostics;
 
-namespace Bark.Tools
+namespace Grate.Tools
 {
     public static class Logging
     {
         private static ManualLogSource logger;
         public static void Init()
         {
-            logger = Logger.CreateLogSource("Bark");
+            logger = Logger.CreateLogSource("Grate");
         }
 
         public static void Exception(Exception e)

@@ -1,10 +1,10 @@
-﻿using Bark.Gestures;
+﻿using Grate.Gestures;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using Bark;
-using Bark.Tools;
+using Grate;
+using Grate.Tools;
 
 public class ButtonController : MonoBehaviour
 {
@@ -60,7 +60,7 @@ public class ButtonController : MonoBehaviour
         {
             buttonModel = transform.GetChild(0);
             this.material = buttonModel.GetComponent<Renderer>().material;
-            this.gameObject.layer = BarkInteractor.InteractionLayer;
+            this.gameObject.layer = GrateInteractor.InteractionLayer;
             var observer = this.gameObject.AddComponent<CollisionObserver>();
             observer.OnTriggerEntered += Press;
             observer.OnTriggerExited += Unpress;

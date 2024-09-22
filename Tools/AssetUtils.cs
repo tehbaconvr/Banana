@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 using System.Reflection;
 
-namespace Bark
+namespace Grate
 {
     public static class AssetUtils
     {

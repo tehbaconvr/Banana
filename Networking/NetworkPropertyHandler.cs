@@ -1,25 +1,27 @@
-﻿using Bark.Tools;
-using Bark.Modules;
+﻿using Grate.Tools;
+using Grate.Modules;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Bark.Extensions;
+using Grate.Extensions;
 using System.Collections;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using Photon.Pun.UtilityScripts;
+using GorillaNetworking;
 
-namespace Bark.Networking
+namespace Grate.Networking
 {
     public class NetworkPropertyHandler : MonoBehaviourPunCallbacks
     {
 
         public static NetworkPropertyHandler Instance;
-        public static string versionKey = "BarkVersion";
-        public Action<Player> OnPlayerJoined, OnPlayerLeft;
-        public Action<Player, string, bool> OnPlayerModStatusChanged;
-        public Dictionary<Player, NetworkedPlayer> networkedPlayers = new Dictionary<Player, NetworkedPlayer>();
+        public static string versionKey = "GrateVersion";
+        public Action<NetPlayer> OnPlayerJoined, OnPlayerLeft;
+        public Action<NetPlayer, string, bool> OnPlayerModStatusChanged;
+        public Dictionary<NetPlayer, NetworkedPlayer> networkedPlayers = new Dictionary<NetPlayer, NetworkedPlayer>();
 
         void Awake()
         {
@@ -34,28 +36,31 @@ namespace Bark.Networking
             {
                 StartCoroutine(CreateNetworkedPlayer(player));
             }
+            NetworkSystem.Instance.OnPlayerJoined += OnPlayerEnteredRoom;
+            NetworkSystem.Instance.OnPlayerLeft += OnPlayerLeftRoom;
         }
 
         public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
         {
-            base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
-            if (targetPlayer == PhotonNetwork.LocalPlayer) return;
-            if (changedProps.ContainsKey(BarkModule.enabledModulesKey))
+            NetPlayer targetNetPlayer = NetworkSystem.Instance.GetPlayer(targetPlayer.ActorNumber);
+            if (targetNetPlayer != NetworkSystem.Instance.LocalPlayer)
             {
-                networkedPlayers[targetPlayer].hasBark = true;
-                var enabledModules = (Dictionary<string, bool>)changedProps[BarkModule.enabledModulesKey];
-                //Logging.Debug(targetPlayer.NickName, "toggled mods:");
-                foreach (var mod in enabledModules)
+                if (changedProps.ContainsKey(GrateModule.enabledModulesKey))
                 {
-                    //Logging.Debug(mod.Value ? "  +" : "  -", mod.Key, mod.Value);
-                    OnPlayerModStatusChanged?.Invoke(targetPlayer, mod.Key, mod.Value);
+                    networkedPlayers[targetPlayer].hasGrate = true;
+                    var enabledModules = (Dictionary<string, bool>)changedProps[GrateModule.enabledModulesKey];
+                    //Logging.Debug(targetPlayer.NickName, "toggled mods:");
+                    foreach (var mod in enabledModules)
+                    {
+                        //Logging.Debug(mod.Value ? "  +" : "  -", mod.Key, mod.Value);
+                        OnPlayerModStatusChanged?.Invoke(targetPlayer, mod.Key, mod.Value);
+                    }
                 }
             }
         }
 
-        public override void OnPlayerLeftRoom(Player otherPlayer)
+        public void OnPlayerLeftRoom(NetPlayer otherPlayer)
         {
-            base.OnPlayerLeftRoom(otherPlayer);
             OnPlayerLeft?.Invoke(otherPlayer);
             if (networkedPlayers.ContainsKey(otherPlayer))
             {
@@ -64,24 +69,23 @@ namespace Bark.Networking
             }
         }
 
-        public override void OnPlayerEnteredRoom(Player newPlayer)
+        public void OnPlayerEnteredRoom(NetPlayer newPlayer)
         {
             try
             {
-                base.OnPlayerEnteredRoom(newPlayer);
                 OnPlayerJoined?.Invoke(newPlayer);
                 StartCoroutine(CreateNetworkedPlayer(newPlayer));
             }
             catch (Exception e) { Logging.Exception(e); }
         }
 
-        IEnumerator CreateNetworkedPlayer(Player player = null, VRRig rig = null)
+        IEnumerator CreateNetworkedPlayer(NetPlayer player = null, VRRig rig = null)
         {
             if (player is null && rig is null)
                 throw new Exception("Both player and rig are null");
 
             if (player is null)
-                player = rig.myPlayer;
+                player = rig.OwningNetPlayer;
             else if (rig is null)
             {
                 for (int i = 0; i < 10; i++)
@@ -94,10 +98,10 @@ namespace Bark.Networking
                     }
                 }
             }
-            var np = rig.gameObject.GetOrAddComponent<NetworkedPlayer>();
+            var np = rig?.gameObject.GetOrAddComponent<NetworkedPlayer>();
             np.owner = player;
             np.rig = rig;
-            networkedPlayers.Add(player, np);
+            networkedPlayers.AddOrUpdate(player, np);
         }
 
         float lastPropertyUpdate;
@@ -110,7 +114,7 @@ namespace Bark.Networking
             foreach (var property in properties)
             {
                 Logging.Debug(property.Key, ":", property.Value);
-                if ((string)property.Key == BarkModule.enabledModulesKey)
+                if ((string)property.Key == GrateModule.enabledModulesKey)
                     foreach (var mod in (Dictionary<string, bool>)property.Value)
                         if (mod.Value)
                             Logging.Debug("    ", property.Key, "is enabled");

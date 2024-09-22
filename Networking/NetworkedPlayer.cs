@@ -1,21 +1,21 @@
-﻿using Bark.Extensions;
-using Bark.Modules.Movement;
-using Bark.Tools;
+﻿using Grate.Extensions;
+using Grate.Modules.Movement;
+using Grate.Tools;
 using Photon.Realtime;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Bark.Networking
+namespace Grate.Networking
 {
     public class NetworkedPlayer : MonoBehaviour
     {
-        public Player owner;
+        public NetPlayer owner;
         public VRRig rig;
         List<MonoBehaviour> modManagers = new List<MonoBehaviour>();
 
         public Action<NetworkedPlayer, bool> OnGripPressed, OnGripReleased;
-        public bool hasBark;
+        public bool hasGrate;
         private bool leftGripWasPressed, rightGripWasPressed;
         private bool leftTriggerWasPressed, rightTriggerWasPressed;
         private bool leftThumbWasPressed, rightThumbWasPressed;
@@ -39,7 +39,7 @@ namespace Bark.Networking
             NetworkPropertyHandler.Instance.OnPlayerModStatusChanged += OnPlayerModStatusChanged;
         }
 
-        void OnPlayerModStatusChanged(Player player, string mod, bool enabled)
+        void OnPlayerModStatusChanged(NetPlayer player, string mod, bool enabled)
         {
             if (player == owner)
             {

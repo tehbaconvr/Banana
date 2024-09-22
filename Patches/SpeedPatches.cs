@@ -1,13 +1,13 @@
 ﻿using HarmonyLib;
-using Bark.Modules.Movement;
-using Bark.Modules;
-using Bark.Tools;
+using Grate.Modules.Movement;
+using Grate.Modules;
+using Grate.Tools;
 using System;
 using AA;
 using GorillaLocomotion;
 using UnityEngine;
 
-namespace Bark.Patches
+namespace Grate.Patches
 {
     [HarmonyPatch(typeof(GorillaTagManager))]
     [HarmonyPatch("LocalPlayerSpeed", MethodType.Normal)]
@@ -43,11 +43,11 @@ namespace Bark.Patches
         }
     }
 
-    [HarmonyPatch(typeof(GorillaBattleManager))]
+    [HarmonyPatch(typeof(GorillaPaintbrawlManager))]
     [HarmonyPatch("LocalPlayerSpeed", MethodType.Normal)]
     internal class BattleSpeedPatch
     {
-        private static void Postfix(GorillaBattleManager __instance, ref float[] __result)
+        private static void Postfix(GorillaPaintbrawlManager __instance, ref float[] __result)
         {
             try
             {

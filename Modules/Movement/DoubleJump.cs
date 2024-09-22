@@ -1,11 +1,11 @@
-﻿using Bark.GUI;
+﻿using Grate.GUI;
 using GorillaLocomotion;
 using UnityEngine;
 using UnityEngine.XR;
 
-namespace Bark.Modules.Movement
+namespace Grate.Modules.Movement
 {
-    public class DoubleJump : BarkModule
+    public class DoubleJump : GrateModule
     {
         public static readonly string DisplayName = "Double Jump";
         public static bool canDoubleJump = true, primaryPressed;

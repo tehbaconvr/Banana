@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections;
-using Bark.GUI;
-using Bark.Patches;
-using Bark.Tools;
+using Grate.GUI;
+using Grate.Patches;
+using Grate.Tools;
 using GorillaLocomotion;
 using UnityEngine;
-using Bark.Modules.Multiplayer;
-using Bark.Modules.Movement;
+using Grate.Modules.Multiplayer;
+using Grate.Modules.Movement;
 using BepInEx.Configuration;
 
-namespace Bark.Modules.Physics
+namespace Grate.Modules.Physics
 {
-    public class NoCollide : BarkModule
+    public class NoCollide : GrateModule
     {
         public static readonly string DisplayName = "No Collide";
         public static NoCollide Instance;

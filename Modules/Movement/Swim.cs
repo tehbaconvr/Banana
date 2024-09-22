@@ -1,13 +1,13 @@
-﻿using Bark.Extensions;
-using Bark.GUI;
+﻿using Grate.Extensions;
+using Grate.GUI;
 using GorillaLocomotion;
 using GorillaLocomotion.Swimming;
 using HarmonyLib;
 using UnityEngine;
 
-namespace Bark.Modules
+namespace Grate.Modules
 {
-    public class Swim : BarkModule
+    public class Swim : GrateModule
     {
         public static readonly string DisplayName = "Swim";
         public GameObject waterVolume;

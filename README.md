@@ -10,7 +10,7 @@
 * YouTube: https://www.youtube.com/@kylethescientist
 
 ## Features
-*Bark* has various modules that can be toggled on and off, including:
+*Grate* has various modules that can be toggled on and off, including:
 
 ### Movement
 * `Airplane` - This allows the player to fly around. **Spread your arms out like and airplane** to activate and use your wrists to steer!
@@ -41,7 +41,7 @@
   pick you up and throw you from afar.
 * `X-Ray` - Allows you to see other players through walls.
 ### Miscellaneous
-* `Join Grate Code` - Allows you to join a private lobby for Bark users.
+* `Join Grate Code` - Allows you to join a private lobby for Grate users.
 
 These modules can be useful for exploring the game world, experimenting with gameplay mechanics, or just having fun with friends. They are **not** meant to be used to harass others, which can result in a ban from the game.
 
@@ -56,16 +56,16 @@ When you join a modded lobby, simply beat on your chest like a gorilla in an alt
 While *Grate* is designed to be safe to use in modded lobbies, it is important to note that using mods in any form in public lobbies can result in a ban from the game. Use *Grate* at your own risk and only in modded lobbies.
 
 ## Bugs and issues
-If you encounter any bugs or issues while using *Bark*, please report them on the mod's GitHub page. I will do my best to address them as soon as possible. 
+If you encounter any bugs or issues while using *Grate*, please report them on the mod's GitHub page. I will do my best to address them as soon as possible. 
 
 ## Contributing
 If you would like to contribute to *Grate*, feel free to submit a pull request on the mod's GitHub page. I welcome any and all contributions that can help make the mod better for everyone.
 
 ## Credits
-*Bark* was created by KyleTheScientist. 
+*Grate* was created by KyleTheScientist. 
 Thanks to the Gorilla Tag modding community for their support.
 Special thanks to my little brother Asher for helping me test :)
 
 * [Boxing Gloves model](https://skfb.ly/6XOUS) by Gohar.Munir is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
-* Orignal Bark Mod by kylethescientist pls show them love!
+* Orignal Grate Mod by kylethescientist pls show them love!

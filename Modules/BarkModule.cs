@@ -1,5 +1,5 @@
-﻿using Bark.Networking;
-using Bark.Tools;
+﻿using Grate.Networking;
+using Grate.Tools;
 using BepInEx.Configuration;
 using System;
 using System.Collections.Generic;
@@ -7,14 +7,14 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace Bark.Modules
+namespace Grate.Modules
 {
-    public abstract class BarkModule : MonoBehaviour
+    public abstract class GrateModule : MonoBehaviour
     {
         public List<ConfigEntryBase> ConfigEntries;
-        public static BarkModule LastEnabled;
+        public static GrateModule LastEnabled;
         public static Dictionary<string, bool> enabledModules = new Dictionary<string, bool>();
-        public static string enabledModulesKey = "BarkEnabledModules";
+        public static string enabledModulesKey = "GrateEnabledModules";
 
         protected virtual void ReloadConfiguration() { }
 
@@ -70,11 +70,11 @@ namespace Bark.Modules
             this.Cleanup();
         }
 
-        public static List<Type> GetBarkModuleTypes()
+        public static List<Type> GetGrateModuleTypes()
         {
             try
             {
-                var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => typeof(BarkModule).IsAssignableFrom(t)).ToList();
+                var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => typeof(GrateModule).IsAssignableFrom(t)).ToList();
                 types.Sort((x, y) =>
                 {
                     FieldInfo xField = x.GetField("DisplayName", BindingFlags.Public | BindingFlags.Static);

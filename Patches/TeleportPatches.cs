@@ -5,11 +5,11 @@ using GorillaLocomotion;
 using HarmonyLib;
 using System.Reflection;
 using UnityEngine;
-using Bark.Modules.Physics;
+using Grate.Modules.Physics;
 using System;
-using Bark.Tools;
+using Grate.Tools;
 
-namespace Bark.Patches
+namespace Grate.Patches
 {
     [HarmonyPatch(typeof(Player))]
     [HarmonyPatch("LateUpdate", MethodType.Normal)]

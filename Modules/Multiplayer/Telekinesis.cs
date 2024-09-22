@@ -1,15 +1,15 @@
-﻿using Bark.Extensions;
-using Bark.Gestures;
-using Bark.GUI;
-using Bark.Tools;
+﻿using Grate.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
+using Grate.Tools;
 using GorillaLocomotion;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Bark.Modules.Multiplayer
+namespace Grate.Modules.Multiplayer
 {
-    public class Telekinesis : BarkModule
+    public class Telekinesis : GrateModule
     {
         public static readonly string DisplayName = "Telekinesis";
         public static Telekinesis Instance;
@@ -29,9 +29,9 @@ namespace Bark.Modules.Multiplayer
                 ReloadConfiguration();
                 var prefab = Plugin.assetBundle.LoadAsset<GameObject>("TK Hitbox");
                 var hitbox = Instantiate(prefab);
-                hitbox.name = "Bark TK Hitbox";
+                hitbox.name = "Grate TK Hitbox";
                 hitbox.transform.SetParent(Player.Instance.bodyCollider.transform, false);
-                hitbox.layer = BarkInteractor.InteractionLayer;
+                hitbox.layer = GrateInteractor.InteractionLayer;
                 tkCollider = hitbox.GetComponent<SphereCollider>();
                 tkCollider.isTrigger = true;
                 playerParticles = hitbox.GetComponent<ParticleSystem>();
@@ -40,9 +40,9 @@ namespace Bark.Modules.Multiplayer
                 sfx = hitbox.GetComponent<AudioSource>();
 
                 var sithlordEffect = Instantiate(prefab);
-                sithlordEffect.name = "Bark Sithlord Particles";
+                sithlordEffect.name = "Grate Sithlord Particles";
                 sithlordEffect.transform.SetParent(Player.Instance.bodyCollider.transform, false);
-                sithlordEffect.layer = BarkInteractor.InteractionLayer;
+                sithlordEffect.layer = GrateInteractor.InteractionLayer;
                 sithlordHandParticles = sithlordEffect.GetComponent<ParticleSystem>();
                 var shape = sithlordHandParticles.shape;
                 shape.radius = .2f;
@@ -120,7 +120,7 @@ namespace Bark.Modules.Multiplayer
             {
                 try
                 {
-                    if (rig.PhotonView().Owner.IsLocal ||
+                    if (rig.OwningNetPlayer.IsLocal ||
                         rig.gameObject.GetComponent<TKMarker>()) continue;
 
                     markers.Add(rig.gameObject.AddComponent<TKMarker>());

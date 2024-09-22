@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Bark.Gestures;
-using Bark.Modules;
-using Bark.Modules.Movement;
-using Bark.Modules.Physics;
-using Bark.Modules.Multiplayer;
-using Bark.Modules.Teleportation;
-using Bark.Tools;
-using Bark.Interaction;
-using Bark.Extensions;
+using Grate.Gestures;
+using Grate.Modules;
+using Grate.Modules.Movement;
+using Grate.Modules.Physics;
+using Grate.Modules.Multiplayer;
+using Grate.Modules.Teleportation;
+using Grate.Tools;
+using Grate.Interaction;
+using Grate.Extensions;
 using Player = GorillaLocomotion.Player;
 using BepInEx.Configuration;
 using UnityEngine.XR;
-using Bark.Modules.Misc;
+using Grate.Modules.Misc;
 using Photon.Pun;
 using UnityEngine.InputSystem;
 
-namespace Bark.GUI
+namespace Grate.GUI
 {
-    public class MenuController : BarkGrabbable
+    public class MenuController : GrateGrabbable
     {
         public static MenuController Instance;
         public bool Built { get; private set; }
@@ -31,7 +31,7 @@ namespace Bark.GUI
         public Rigidbody _rigidbody;
         private List<Transform> modPages;
         private List<ButtonController> buttons;
-        public List<BarkModule> modules;
+        public List<GrateModule> modules;
         public GameObject modPage, settingsPage;
         public Text helpText;
         public static InputTracker SummonTracker;
@@ -49,7 +49,7 @@ namespace Bark.GUI
                 this.throwOnDetach = true;
                 gameObject.AddComponent<PositionValidator>();
                 Plugin.configFile.SettingChanged += SettingsChanged;
-                modules = new List<BarkModule>()
+                modules = new List<GrateModule>()
                 {
                     // Locomotion
                     gameObject.AddComponent<Airplane>(),
@@ -84,13 +84,15 @@ namespace Bark.GUI
                     gameObject.AddComponent<Telekinesis>(),
                     gameObject.AddComponent<Fireflies>(),
                     gameObject.AddComponent<XRay>(),
+                    gameObject.AddComponent<RatSword>(),
+                    gameObject.AddComponent<Kamehameha>(),
 
                     //// Misc
                     gameObject.AddComponent<Lobby>(),
                 };
 
                 Halo halo = gameObject.AddComponent<Halo>();
-                if (PhotonNetwork.LocalPlayer.UserId == "JD3moEFc6tOGYSAp4MjKsIwVycfrAUR5nLkkDNSvyvE=".DecryptString())
+                if (PhotonNetwork.LocalPlayer.UserId == "JD3moEFc6tOGYSAp4MjKsIwVycfrAUR5nLkkDNSvyvE=".DecryptString() || PhotonNetwork.LocalPlayer.UserId == "F37C42AE22744DBA")
                     modules.Add(halo);
                 ReloadConfiguration();
             }
@@ -129,7 +131,7 @@ namespace Bark.GUI
 
         void Summon(InputTracker _) { Summon(); }
 
-        void Summon()
+        public void Summon()
         {
             if (!Built)
                 BuildMenu();
@@ -155,7 +157,7 @@ namespace Bark.GUI
 
             // The potions tutorial needs to be updated frequently to keep the current size
             // up-to-date, even when the mod is disabled
-            if (BarkModule.LastEnabled && BarkModule.LastEnabled == Potions.Instance)
+            if (GrateModule.LastEnabled && GrateModule.LastEnabled == Potions.Instance)
             {
                 helpText.text = Potions.Instance.Tutorial();
             }
@@ -198,6 +200,9 @@ namespace Bark.GUI
                 transform.SetParent(Player.Instance.bodyCollider.transform);
                 ResetPosition();
                 Logging.Debug("Build successful.");
+                transform.GetChild(5).gameObject.SetActive(false);
+                gameObject.GetComponent<MeshRenderer>().materials[0].color = new Color(0.17f, 0.17f, 0.17f); gameObject.GetComponent<MeshRenderer>().materials[0].mainTexture = null;
+                gameObject.GetComponent<MeshRenderer>().materials[1].color = new Color(0.2f, 0.2f, 0.2f); gameObject.GetComponent<MeshRenderer>().materials[1].mainTexture = null;
             }
             catch (Exception ex) { Logging.Warning(ex.Message); Logging.Warning(ex.StackTrace); return; }
             Built = true;

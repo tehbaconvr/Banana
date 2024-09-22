@@ -1,17 +1,17 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-using Bark.Gestures;
-using Bark.GUI;
-using Bark.Tools;
-using Bark.Extensions;
+using Grate.Gestures;
+using Grate.GUI;
+using Grate.Tools;
+using Grate.Extensions;
 using GorillaLocomotion;
 using BepInEx.Configuration;
-using Bark.Interaction;
+using Grate.Interaction;
 
-namespace Bark.Modules.Movement
+namespace Grate.Modules.Movement
 {
-    public class GrapplingHooks : BarkModule
+    public class GrapplingHooks : GrateModule
     {
         public static readonly string DisplayName = "Grappling Hooks";
         private GameObject bananaGunPrefab, bananaGunL, bananaGunR;
@@ -166,7 +166,7 @@ namespace Bark.Modules.Movement
         }
     }
 
-    public class BananaGun : BarkGrabbable
+    public class BananaGun : GrateGrabbable
     {
         public enum RopeType
         {
@@ -214,13 +214,13 @@ namespace Bark.Modules.Movement
         }
 
         SpringJoint joint;
-        public override void OnActivate(BarkInteractor interactor)
+        public override void OnActivate(GrateInteractor interactor)
         {
             base.OnActivate(interactor);
             Activated = true;
         }
 
-        public override void OnDeactivate(BarkInteractor interactor)
+        public override void OnDeactivate(GrateInteractor interactor)
         {
             base.OnDeactivate(interactor);
             Activated = false;
@@ -313,7 +313,7 @@ namespace Bark.Modules.Movement
             }
         }
 
-        public override void OnDeselect(BarkInteractor interactor)
+        public override void OnDeselect(GrateInteractor interactor)
         {
             base.OnDeselect(interactor);
             laser.enabled = false;
@@ -324,11 +324,11 @@ namespace Bark.Modules.Movement
         public void SetupInteraction()
         {
             this.throwOnDetach = false;
-            gameObject.layer = BarkInteractor.InteractionLayer;
+            gameObject.layer = GrateInteractor.InteractionLayer;
             if (openModel)
-                openModel.layer = BarkInteractor.InteractionLayer;
+                openModel.layer = GrateInteractor.InteractionLayer;
             if (closedModel)
-                closedModel.layer = BarkInteractor.InteractionLayer;
+                closedModel.layer = GrateInteractor.InteractionLayer;
         }
 
         void Open()

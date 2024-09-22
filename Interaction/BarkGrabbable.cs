@@ -1,11 +1,11 @@
-﻿using Bark.Gestures;
+﻿using Grate.Gestures;
 using GorillaLocomotion;
 using UnityEngine;
 
 
-namespace Bark.Interaction
+namespace Grate.Interaction
 {
-    public class BarkGrabbable : BarkInteractable
+    public class GrateGrabbable : GrateInteractable
     {
         private Vector3 _localPos, _mirrorPos;
         Vector3 mirrorScale = new Vector3(-1, 1, 1);
@@ -35,11 +35,11 @@ namespace Bark.Interaction
         {
             base.Awake();
             var gt = GestureTracker.Instance;
-            validSelectors = new BarkInteractor[] { gt.leftPalmInteractor, gt.rightPalmInteractor };
+            validSelectors = new GrateInteractor[] { gt.leftPalmInteractor, gt.rightPalmInteractor };
             velEstimator = this.gameObject.AddComponent<GorillaVelocityEstimator>();
         }
 
-        public override void OnSelect(BarkInteractor interactor)
+        public override void OnSelect(GrateInteractor interactor)
         {
             if (this.GetComponent<Rigidbody>() is Rigidbody rb)
             {
@@ -55,7 +55,7 @@ namespace Bark.Interaction
             base.OnSelect(interactor);
         }
 
-        public override void OnDeselect(BarkInteractor interactor)
+        public override void OnDeselect(GrateInteractor interactor)
         {
             this.transform.SetParent(null);
             if (this.GetComponent<Rigidbody>() is Rigidbody rb)

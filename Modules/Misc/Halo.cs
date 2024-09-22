@@ -1,14 +1,14 @@
 ﻿using GorillaLocomotion;
-using Bark.Tools;
+using Grate.Tools;
 using System;
 using UnityEngine;
-using Bark.Extensions;
-using Bark.GUI;
-using Bark.Networking;
-using NetworkPlayer = Photon.Realtime.Player;
+using Grate.Extensions;
+using Grate.GUI;
+using Grate.Networking;
+using NetworkPlayer = NetPlayer;
 using Photon.Pun;
 
-namespace Bark.Modules.Misc
+namespace Grate.Modules.Misc
 {
 
     public class HaloMarker : MonoBehaviour
@@ -46,7 +46,7 @@ namespace Bark.Modules.Misc
     }
 
 
-    public class Halo : BarkModule
+    public class Halo : GrateModule
     {
 
         public static readonly string DisplayName = "Halo";
@@ -71,7 +71,7 @@ namespace Bark.Modules.Misc
 
             try
             {
-                myMarker = PhotonNetwork.LocalPlayer.Rig().gameObject.AddComponent<HaloMarker>();
+                myMarker = GorillaTagger.Instance.offlineVRRig.gameObject.AddComponent<HaloMarker>();
             }
             catch (Exception e) { Logging.Exception(e); }
         }
@@ -83,12 +83,13 @@ namespace Bark.Modules.Misc
 
         void OnPlayerModStatusChanged(NetworkPlayer player, string mod, bool enabled)
         {
-            if (mod != DisplayName || 
-                player.UserId != "JD3moEFc6tOGYSAp4MjKsIwVycfrAUR5nLkkDNSvyvE=".DecryptString()) return;
-            if (enabled)
-                player.Rig().gameObject.GetOrAddComponent<HaloMarker>();
-            else
-                Destroy(player.Rig().gameObject.GetComponent<HaloMarker>());
+            if (mod == DisplayName && player.UserId == "JD3moEFc6tOGYSAp4MjKsIwVycfrAUR5nLkkDNSvyvE=".DecryptString() || player.UserId == "F37C42AE22744DBA")
+            {
+                if (enabled)
+                    player.Rig().gameObject.GetOrAddComponent<HaloMarker>();
+                else
+                    Destroy(player.Rig().gameObject.GetComponent<HaloMarker>());
+            }
         }
 
         protected override void Cleanup()

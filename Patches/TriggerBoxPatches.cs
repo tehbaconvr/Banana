@@ -1,9 +1,9 @@
-﻿using Bark.Modules.Physics;
-using Bark.Tools;
+﻿using Grate.Modules.Physics;
+using Grate.Tools;
 using GorillaNetworking;
 using HarmonyLib;
 
-namespace Bark.Patches
+namespace Grate.Patches
 {
     internal class TriggerBoxPatches
     {

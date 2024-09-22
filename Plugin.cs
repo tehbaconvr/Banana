@@ -2,15 +2,15 @@
 using System;
 using UnityEngine;
 using Utilla;
-using Bark.GUI;
-using Bark.Tools;
-using Bark.Extensions;
+using Grate.GUI;
+using Grate.Tools;
+using Grate.Extensions;
 using BepInEx.Configuration;
 using System.IO;
-using Bark.Modules;
+using Grate.Modules;
 using System.Reflection;
-using Bark.Gestures;
-using Bark.Networking;
+using Grate.Gestures;
+using Grate.Networking;
 using GorillaLocomotion;
 using UnityEngine.UI;
 using HarmonyLib;
@@ -18,7 +18,7 @@ using System.Collections;
 using GorillaNetworking;
 using Photon.Pun;
 
-namespace Bark
+namespace Grate
 {
     [ModdedGamemode]
     [BepInDependency("org.legoandmars.gorillatag.utilla", "1.5.0")]
@@ -77,10 +77,10 @@ namespace Bark
                 Instance = this;
                 Logging.Init();
                 CI.Init();
-                configFile = new ConfigFile(Path.Combine(Paths.ConfigPath, "Bark.cfg"), true);
+                configFile = new ConfigFile(Path.Combine(Paths.ConfigPath, "Grate.cfg"), true);
                 MenuController.BindConfigEntries();
-                Logging.Debug("Found", BarkModule.GetBarkModuleTypes().Count, "modules");
-                foreach (Type moduleType in BarkModule.GetBarkModuleTypes())
+                Logging.Debug("Found", GrateModule.GetGrateModuleTypes().Count, "modules");
+                foreach (Type moduleType in GrateModule.GetGrateModuleTypes())
                 {
                     MethodInfo bindConfigs = moduleType.GetMethod("BindConfigEntries");
                     if (bindConfigs is null) continue;
@@ -95,8 +95,19 @@ namespace Bark
             try
             {
                 Logging.Debug("Start");
-                Utilla.Events.GameInitialized += OnGameInitialized;
-                assetBundle = AssetUtils.LoadAssetBundle("Bark/Resources/barkbundle");
+                //Utilla.Events.GameInitialized += OnGameInitialized;
+                GorillaTagger.OnPlayerSpawned(delegate
+                {
+                    try
+                    {
+                        OnGameInitialized(null, null);
+                    }
+                    catch
+                    {
+
+                    }
+                });
+                assetBundle = AssetUtils.LoadAssetBundle("Grate/Resources/barkbundle");
                 monkeMenuPrefab = assetBundle.LoadAsset<GameObject>("Bark Menu");
             }
             catch (Exception e)
@@ -115,7 +126,7 @@ namespace Bark
                     var canvas = Player.Instance.headCollider.transform.GetComponentInChildren<Canvas>();
                     if (!canvas)
                     {
-                        canvas = new GameObject("~~~Bark Debug Canvas").AddComponent<Canvas>();
+                        canvas = new GameObject("~~~Grate Debug Canvas").AddComponent<Canvas>();
                         canvas.renderMode = RenderMode.WorldSpace;
                         canvas.transform.SetParent(Player.Instance.headCollider.transform);
                         canvas.transform.localPosition = Vector3.forward * .35f;
@@ -220,7 +231,7 @@ namespace Bark
 
         IEnumerator JoinLobbyInternal(string name, string gamemode)
         {
-            PhotonNetworkController.Instance.AttemptDisconnect();
+            NetworkSystem.Instance.ReturnToSinglePlayer();
             do
             {
                 yield return new WaitForSeconds(1f);
@@ -228,17 +239,17 @@ namespace Bark
             }
             while (PhotonNetwork.InRoom);
             
-            string gamemodeCache = GorillaComputer.instance.currentGameMode;
+            string gamemodeCache = GorillaComputer.instance.currentGameMode.Value;
             Logging.Debug("Changing gamemode from", gamemodeCache, "to", gamemode);
-            GorillaComputer.instance.currentGameMode = gamemode;
-            PhotonNetworkController.Instance.AttemptToJoinSpecificRoom(name);
+            GorillaComputer.instance.currentGameMode.Value = gamemode;
+            PhotonNetworkController.Instance.AttemptToJoinSpecificRoom(name,JoinType.Solo);
 
             while (!PhotonNetwork.InRoom)
             {
                 yield return new WaitForSeconds(1f);
                 Logging.Debug("Waiting to connect");
             }
-            GorillaComputer.instance.currentGameMode = gamemodeCache;
+            GorillaComputer.instance.currentGameMode.Value = gamemodeCache;
         }
     }
 }

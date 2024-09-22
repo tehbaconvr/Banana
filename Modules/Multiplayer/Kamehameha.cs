@@ -1,17 +1,17 @@
 ﻿using GorillaLocomotion;
-using Bark.Extensions;
-using Bark.GUI;
-using Bark.Gestures;
-using Bark.Tools;
+using Grate.Extensions;
+using Grate.GUI;
+using Grate.Gestures;
+using Grate.Tools;
 using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using BepInEx.Configuration;
 
-namespace Bark.Modules.Multiplayer
+namespace Grate.Modules.Multiplayer
 {
-    public class Kamehameha : BarkModule
+    public class Kamehameha : GrateModule
     {
         public static readonly string DisplayName = "Kamehameha";
 
@@ -21,11 +21,11 @@ namespace Bark.Modules.Multiplayer
         private bool isCharging, isFiring;
         public static readonly float maxOrbSize = .2f;
 
-        protected override void Start()
+        protected override void OnEnable()
         {
             try
             {
-                base.Start();
+                base.OnEnable();
                 if (!MenuController.Instance.Built) return; // This all needs to be moved to OnEnable before it can work
                 bananaLine = Instantiate(Plugin.assetBundle.LoadAsset<GameObject>("Laser Sight")).GetComponent<LineRenderer>();
                 bananaLine.gameObject.SetActive(false);
@@ -35,7 +35,7 @@ namespace Bark.Modules.Multiplayer
                 orbBody = orb.gameObject.AddComponent<Rigidbody>();
                 orbBody.isKinematic = true;
                 orbBody.useGravity = false;
-                orb.gameObject.layer = BarkInteractor.InteractionLayer;
+                orb.gameObject.layer = GrateInteractor.InteractionLayer;
                 orb.gameObject.GetComponent<Renderer>().material = bananaLine.material;
                 GestureTracker.Instance.OnKamehameha += OnKamehameha;
 
