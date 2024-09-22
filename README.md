@@ -9,7 +9,7 @@
 ## Links
 
 * Discord: https://discord.gg/B2MErU9KCp
-* YouTube: "https://www.youtube.com/@Graze_"
+* YouTube: https://youtube.com/@graze_?si=a4UvBEjjFuefMG-w
 
 * OG Discord: https://discord.gg/B2MErU9KCp
 * OG YouTube: https://www.youtube.com/@kylethescientist
