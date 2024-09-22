@@ -9,7 +9,10 @@
 ## Links
 
 * Discord: https://discord.gg/B2MErU9KCp
-* YouTube: https://www.youtube.com/@kylethescientist
+* YouTube: https://www.youtube.com/@Graze_
+
+* OG Discord: https://discord.gg/B2MErU9KCp
+* OG YouTube: https://www.youtube.com/@kylethescientist
 
 ## Features
 *Grate* has various modules that can be toggled on and off, including:
