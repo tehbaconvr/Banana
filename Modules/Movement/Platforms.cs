@@ -148,7 +148,7 @@ namespace Grate.Modules.Movement
         {
             if (!platformPrefab)
             {
-                platformPrefab = Plugin.assetBundle.LoadAsset<GameObject>("Grate Platform");
+                platformPrefab = Plugin.assetBundle.LoadAsset<GameObject>("Bark Platform");
             }
         }
 

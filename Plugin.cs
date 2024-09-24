@@ -34,7 +34,7 @@ namespace Grate
         public static GameObject monkeMenuPrefab;
         public static ConfigFile configFile;
         public static bool IsSteam { get; protected set; }
-        public static bool DebugMode { get; protected set; } = false;
+        public static bool DebugMode { get; protected set; } = true;
         GestureTracker gt;
         NetworkPropertyHandler nph;
 

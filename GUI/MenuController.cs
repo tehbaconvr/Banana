@@ -84,8 +84,8 @@ namespace Grate.GUI
                     gameObject.AddComponent<Telekinesis>(),
                     gameObject.AddComponent<Fireflies>(),
                     gameObject.AddComponent<XRay>(),
-                    gameObject.AddComponent<RatSword>(),
-                    gameObject.AddComponent<Kamehameha>(),
+                    //gameObject.AddComponent<RatSword>(),
+                    //gameObject.AddComponent<Kamehameha>(),
 
                     //// Misc
                     gameObject.AddComponent<Lobby>(),
