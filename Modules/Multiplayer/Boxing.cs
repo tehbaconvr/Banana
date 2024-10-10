@@ -83,8 +83,10 @@ namespace Grate.Modules.Multiplayer
             if (!(gloves is null))
             {
                 foreach (BoxingGlove g in gloves)
-                    g?.gameObject.Obliterate();
-                gloves.Clear();
+                {
+                    gloves.Remove(g);
+                    Destroy(g?.gameObject);
+                }
             }
         }
 
@@ -96,11 +98,18 @@ namespace Grate.Modules.Multiplayer
             {
                 if (g && g?.rig.OwningNetPlayer == player)
                 {
-                    g?.gameObject.Obliterate();
+                    gloves.Remove(g);
+                    Destroy(g?.gameObject);
                     Logging.Debug($"Destroyed {player.NickName}'s gloves.");
                 }
             }
-            gloves.RemoveAll(g => g is null);
+            foreach (VRRig rig in glovedRigs)
+            {
+                if (rig.OwningNetPlayer == player) 
+                {
+                    glovedRigs.Remove(rig);
+                }
+            }
         }
 
         Queue<NetworkPlayer> gloveQueue = new Queue<NetworkPlayer>();

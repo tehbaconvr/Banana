@@ -21,7 +21,7 @@ using Photon.Pun;
 namespace Grate
 {
     [ModdedGamemode]
-    [BepInDependency("org.legoandmars.gorillatag.utilla", "1.5.0")]
+    [BepInDependency("org.legoandmars.gorillatag.utilla")]
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
 
     public class Plugin : BaseUnityPlugin
@@ -34,7 +34,7 @@ namespace Grate
         public static GameObject monkeMenuPrefab;
         public static ConfigFile configFile;
         public static bool IsSteam { get; protected set; }
-        public static bool DebugMode { get; protected set; } = true;
+        public static bool DebugMode { get; protected set; } = false;
         GestureTracker gt;
         NetworkPropertyHandler nph;
 

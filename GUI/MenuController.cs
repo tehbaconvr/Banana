@@ -89,6 +89,7 @@ namespace Grate.GUI
 
                     //// Misc
                     gameObject.AddComponent<Lobby>(),
+                    gameObject.AddComponent<ReturnToVS>(),
                 };
 
                 Halo halo = gameObject.AddComponent<Halo>();

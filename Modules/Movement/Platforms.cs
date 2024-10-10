@@ -45,9 +45,6 @@ namespace Grate.Modules.Movement
 
                 var handObj = isLeft ? Player.Instance.leftControllerTransform : Player.Instance.rightControllerTransform;
                 this.hand = handObj.transform;
-
-                string climberName = isLeft ? "leftClimber" : "rightClimber";
-                climber = Traverse.Create(EquipmentInteractor.instance).Field<GorillaHandClimber>(climberName).Value;
             }
             catch (Exception e)
             {
@@ -66,10 +63,23 @@ namespace Grate.Modules.Movement
             collider.gameObject.layer = NoCollide.active ? NoCollide.layer : 0;
             collider.enabled = !isSticky;
             if (isSticky)
+            {
                 Sounds.Play(111, .1f, this.isLeft);
+            }   
             this.model.SetActive(true);
             if (modelName == "storm cloud")
+            {
                 rain.Play();
+            }
+            try
+            {
+                string climberName = isLeft ? "leftClimber" : "rightClimber";
+                climber = Traverse.Create(EquipmentInteractor.instance).Field<GorillaHandClimber>(climberName).Value;
+            }
+            catch (Exception e)
+            {
+                Logging.Exception(e);
+            }
         }
 
         public void Deactivate()
@@ -79,20 +89,22 @@ namespace Grate.Modules.Movement
             if (!this.model.name.Contains("cloud"))
                 this.model.SetActive(false);
             rain.Stop();
-
+            Destroy(climber);
         }
 
         void FixedUpdate()
         {
             if (isActive)
+            {
                 spawnTime = Time.time;
 
-            float transparency = Mathf.Clamp((Time.time - spawnTime) / 1f, 0.2f, 1);
-            float c = modelName == "storm cloud" ? .2f : 1;
-            cloudMaterial.color = new Color(c, c, c, Mathf.Lerp(1, 0, transparency));
-            if (model.name == "doug")
-            {
-                wings.transform.localRotation = Quaternion.Euler(Time.frameCount % 2 == 0 ? -30 : 0, 0, 0);
+                float transparency = Mathf.Clamp((Time.time - spawnTime) / 1f, 0.2f, 1);
+                float c = modelName == "storm cloud" ? .2f : 1;
+                cloudMaterial.color = new Color(c, c, c, Mathf.Lerp(1, 0, transparency));
+                if (model.name == "doug")
+                {
+                    wings.transform.localRotation = Quaternion.Euler(Time.frameCount % 2 == 0 ? -30 : 0, 0, 0);
+                }
             }
         }
 
@@ -175,27 +187,36 @@ namespace Grate.Modules.Movement
 
         public void OnActivate(InputTracker tracker)
         {
-            if (!enabled) return;
-            bool isLeft = (tracker == inputL);
-            main = isLeft ? left : right;
-            var other = !isLeft ? left : right;
-            main.Activate();
-            if (Sticky.Value)
+            if (enabled)
             {
-                Player.Instance.bodyCollider.attachedRigidbody.velocity = Vector3.zero;
-                other.Deactivate();
+                bool isLeft = (tracker.node == XRNode.LeftHand);
+
+                main = isLeft ? left : right;
+
+                var other = !isLeft ? left : right;
+
+                main.Activate();
+
+                if (Sticky.Value)
+                {
+                    Player.Instance.bodyCollider.attachedRigidbody.velocity = Vector3.zero;
+                    other.Deactivate();
+                }
             }
         }
 
         public void OnDeactivate(InputTracker tracker)
         {
-            bool isLeft = tracker == inputL;
+            bool isLeft = (tracker.node == XRNode.LeftHand);
+
             var platform = isLeft ? left : right;
+
             platform.Deactivate();
             if (Sticky.Value && platform == main)
             {
                 var rb = Player.Instance.bodyCollider.attachedRigidbody;
                 rb.velocity = Player.Instance.bodyVelocityTracker.GetAverageVelocity(true, 0.15f, false);
+                Player.Instance.isClimbing = true;
             }
         }
 
@@ -203,12 +224,14 @@ namespace Grate.Modules.Movement
         {
             if (Sticky.Value && main.isActive)
             {
-                Player.Instance.isClimbing = true;
-                Vector3 offset = main.climber.transform.position - main.transform.position;
-                var rb = Player.Instance.bodyCollider.attachedRigidbody;
-                rb.velocity = Vector3.zero;
-                rb.useGravity = false;
-                rb.MovePosition(rb.position - offset);
+                if (main.climber != null)
+                {
+                    Player.Instance.isClimbing = true;
+                    Vector3 offset = main.climber.transform.position - main.transform.position;
+                    var rb = Player.Instance.bodyCollider.attachedRigidbody;
+                    rb.velocity = Vector3.zero;
+                    rb.MovePosition(rb.position - offset);
+                }
             }
         }
 
