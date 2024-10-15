@@ -57,7 +57,7 @@ namespace Grate.Modules
         }
         protected override void ReloadConfiguration()
         {
-            scale = 1 + (Speed.Value / 10f);
+            scale = 1 + (Speed.Value / 20f);
             if(this.enabled)
                 Player.Instance.velocityLimit = baseVelocityLimit * scale;
         }

@@ -48,7 +48,7 @@ namespace Grate.Patches
                 if (!triggersEnabled)
                 {
                     Logging.Debug("Player fell out of map, disabling noclip");
-                    NoCollide.Instance.enabled = false;
+                    NoClip.Instance.enabled = false;
                 }
                 return triggersEnabled;
             }

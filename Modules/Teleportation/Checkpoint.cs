@@ -58,7 +58,7 @@ namespace Grate.Modules.Teleportation
         {
             checkpointMarker.gameObject.SetActive(true);
             float startTime = Time.time;
-            while (GestureTracker.Instance.leftTrigger.pressed && !NoCollide.active)
+            while (GestureTracker.Instance.leftTrigger.pressed && !NoClip.active)
             {
 
                 float chargeScale = MathExtensions.Map(ChargeTime.Value, 0, 10, 0f, 1f);

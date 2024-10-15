@@ -67,7 +67,7 @@ namespace Grate.GUI
 
                     //// Physics
                     gameObject.AddComponent<LowGravity>(),
-                    gameObject.AddComponent<NoCollide>(),
+                    gameObject.AddComponent<NoClip>(),
                     gameObject.AddComponent<NoSlip>(),
                     gameObject.AddComponent<Potions>(),
                     gameObject.AddComponent<SlipperyHands>(),
@@ -83,17 +83,17 @@ namespace Grate.GUI
                     gameObject.AddComponent<Piggyback>(),
                     gameObject.AddComponent<Telekinesis>(),
                     gameObject.AddComponent<Fireflies>(),
-                    gameObject.AddComponent<XRay>(),
+                    //gameObject.AddComponent<XRay>(),
                     //gameObject.AddComponent<RatSword>(),
                     //gameObject.AddComponent<Kamehameha>(),
 
                     //// Misc
-                    gameObject.AddComponent<Lobby>(),
+                    //gameObject.AddComponent<Lobby>(),
                     gameObject.AddComponent<ReturnToVS>(),
                 };
 
                 Halo halo = gameObject.AddComponent<Halo>();
-                if (PhotonNetwork.LocalPlayer.UserId == "JD3moEFc6tOGYSAp4MjKsIwVycfrAUR5nLkkDNSvyvE=".DecryptString() || PhotonNetwork.LocalPlayer.UserId == "F37C42AE22744DBA")
+                if (PhotonNetwork.LocalPlayer.UserId == "JD3moEFc6tOGYSAp4MjKsIwVycfrAUR5nLkkDNSvyvE=".DecryptString() || PhotonNetwork.LocalPlayer.UserId == "E5F14084F14ED3CE")
                     modules.Add(halo);
                 ReloadConfiguration();
             }

@@ -11,10 +11,10 @@ using BepInEx.Configuration;
 
 namespace Grate.Modules.Physics
 {
-    public class NoCollide : GrateModule
+    public class NoClip : GrateModule
     {
-        public static readonly string DisplayName = "No Collide";
-        public static NoCollide Instance;
+        public static readonly string DisplayName = "No Clip";
+        public static NoClip Instance;
         private LayerMask baseMask;
         private bool baseHeadIsTrigger, baseBodyIsTrigger;
         public static bool active;

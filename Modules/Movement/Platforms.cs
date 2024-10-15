@@ -11,12 +11,13 @@ using GorillaLocomotion.Climbing;
 using HarmonyLib;
 using Grate.Modules.Physics;
 using Grate.Networking;
+using Fusion;
+using UnityEngine.Animations.Rigging;
 
 namespace Grate.Modules.Movement
 {
     public class Platform : MonoBehaviour
     {
-        public GorillaHandClimber climber;
         public bool isSticky, isActive, isLeft;
         Transform hand;
         private Material cloudMaterial;
@@ -24,7 +25,7 @@ namespace Grate.Modules.Movement
         Collider collider;
         Vector3 scale;
         string modelName;
-        GameObject model;
+        GameObject model, HandBlock;
         Transform wings;
         ParticleSystem rain;
 
@@ -45,6 +46,13 @@ namespace Grate.Modules.Movement
 
                 var handObj = isLeft ? Player.Instance.leftControllerTransform : Player.Instance.rightControllerTransform;
                 this.hand = handObj.transform;
+                HandBlock = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                HandBlock.transform.SetParent(transform);
+                HandBlock.transform.localPosition = new Vector3(0.06f ,0, 0);
+                HandBlock.transform.localScale = new Vector3(0.01f, 0.31f, 0.33f);
+                HandBlock.transform.localRotation = Quaternion.Euler(0, 347.5295f, 10.0527f);
+
+                rain.loop = true;
             }
             catch (Exception e)
             {
@@ -59,37 +67,26 @@ namespace Grate.Modules.Movement
             this.transform.position = hand.transform.position;
             this.transform.rotation = hand.transform.rotation;
             this.transform.localScale = scale * Player.Instance.scale;
-            collider.gameObject.layer = NoCollide.active ? NoCollide.layer : 0;
-            collider.gameObject.layer = NoCollide.active ? NoCollide.layer : 0;
-            collider.enabled = !isSticky;
-            if (isSticky)
-            {
-                Sounds.Play(111, .1f, this.isLeft);
-            }   
+            collider.gameObject.layer = NoClip.active ? NoClip.layer : 0;
+            collider.gameObject.layer = NoClip.active ? NoClip.layer : 0;
+            collider.enabled = true;
+            HandBlock.SetActive(true);
             this.model.SetActive(true);
             if (modelName == "storm cloud")
             {
                 rain.Play();
             }
-            try
-            {
-                string climberName = isLeft ? "leftClimber" : "rightClimber";
-                climber = Traverse.Create(EquipmentInteractor.instance).Field<GorillaHandClimber>(climberName).Value;
-            }
-            catch (Exception e)
-            {
-                Logging.Exception(e);
-            }
+            Player.Instance.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            Player.Instance.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         }
 
         public void Deactivate()
         {
             isActive = false;
             collider.enabled = false;
+            HandBlock.SetActive(false);
             if (!this.model.name.Contains("cloud"))
                 this.model.SetActive(false);
-            rain.Stop();
-            Destroy(climber);
         }
 
         void FixedUpdate()
@@ -115,7 +112,7 @@ namespace Grate.Modules.Movement
             {
                 this.isSticky = value;
                 if (isActive)
-                    collider.enabled = !isSticky;
+                    HandBlock.SetActive(isSticky);
             }
         }
 
@@ -212,28 +209,8 @@ namespace Grate.Modules.Movement
             var platform = isLeft ? left : right;
 
             platform.Deactivate();
-            if (Sticky.Value && platform == main)
-            {
-                var rb = Player.Instance.bodyCollider.attachedRigidbody;
-                rb.velocity = Player.Instance.bodyVelocityTracker.GetAverageVelocity(true, 0.15f, false);
-                Player.Instance.isClimbing = true;
-            }
         }
 
-        void LateUpdate()
-        {
-            if (Sticky.Value && main.isActive)
-            {
-                if (main.climber != null)
-                {
-                    Player.Instance.isClimbing = true;
-                    Vector3 offset = main.climber.transform.position - main.transform.position;
-                    var rb = Player.Instance.bodyCollider.attachedRigidbody;
-                    rb.velocity = Vector3.zero;
-                    rb.MovePosition(rb.position - offset);
-                }
-            }
-        }
 
         protected override void Cleanup()
         {
