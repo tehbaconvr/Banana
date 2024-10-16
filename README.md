@@ -67,7 +67,8 @@ If you encounter any bugs or issues while using *Grate*, please report them on t
 If you would like to contribute to *Grate*, feel free to submit a pull request on the mod's GitHub page. I welcome any and all contributions that can help make the mod better for everyone.
 
 ## Credits
-*Grate* was created by KyleTheScientist. 
+*Grate* was created by Graze. 
+*BArk* was created by KyleTheScientist. 
 Thanks to the Gorilla Tag modding community for their support.
 Special thanks to my little brother Asher for helping me test :)
 
