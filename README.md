@@ -44,7 +44,6 @@
 * `Piggyback` - Allows you to ride other players! To mount someone, **have them give a thumbs-up**, and then **grip nearby them**. If they **give you a thumbs down** at any point, you'll stop riding them. *Consent is important!*
 * `Telekinesis` - If another player points at you with their grip button pressed, they can
   pick you up and throw you from afar.
-* `X-Ray` - Allows you to see other players through walls.
 ### Miscellaneous
 * `Join Grate Code` - Allows you to join a private lobby for Grate users.
 
