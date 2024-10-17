@@ -44,7 +44,6 @@
 * `Piggyback` - Allows you to ride other players! To mount someone, **have them give a thumbs-up**, and then **grip nearby them**. If they **give you a thumbs down** at any point, you'll stop riding them. *Consent is important!*
 * `Telekinesis` - If another player points at you with their grip button pressed, they can
   pick you up and throw you from afar.
-* `X-Ray` - Allows you to see other players through walls.
 ### Miscellaneous
 * `Join Grate Code` - Allows you to join a private lobby for Grate users.
 
@@ -67,7 +66,8 @@ If you encounter any bugs or issues while using *Grate*, please report them on t
 If you would like to contribute to *Grate*, feel free to submit a pull request on the mod's GitHub page. I welcome any and all contributions that can help make the mod better for everyone.
 
 ## Credits
-*Grate* was created by KyleTheScientist. 
+*Grate* was created by Graze. 
+*Bark* was created by KyleTheScientist. 
 Thanks to the Gorilla Tag modding community for their support.
 Special thanks to my little brother Asher for helping me test :)
 
