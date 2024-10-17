@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using NetworkPlayer = NetPlayer;
 using Player = GorillaLocomotion.Player;
+using UnityEngine.UIElements;
+using System.Collections;
 namespace Grate.Modules.Multiplayer
 {
     public class BoxingGlove : MonoBehaviour
@@ -17,7 +19,7 @@ namespace Grate.Modules.Multiplayer
         public AudioSource punchSound;
         public GorillaVelocityEstimator velocity;
         public static int uuid;
-        
+
         void Start()
         {
             punchSound = GetComponent<AudioSource>();
@@ -61,7 +63,6 @@ namespace Grate.Modules.Multiplayer
                         DoPunch(glove);
                     }
                 };
-                NetworkPropertyHandler.Instance.OnPlayerLeft += OnPlayerLeft;
                 NetworkPropertyHandler.Instance.OnPlayerJoined += OnPlayerJoined;
                 CreateGloves();
             }
@@ -70,6 +71,18 @@ namespace Grate.Modules.Multiplayer
                 Logging.Exception(e);
             }
         }
+        protected override void OnDisable()
+        {
+            foreach (var g in Resources.FindObjectsOfTypeAll<BoxingGlove>())
+            {
+                if (gloves.Contains(g))
+                {
+                    gloves.Remove(g);
+                }
+                g.gameObject.Obliterate();
+            }
+            base.OnDisable();
+        }
 
         protected override void Cleanup()
         {
@@ -77,65 +90,27 @@ namespace Grate.Modules.Multiplayer
             glovedRigs.Clear();
             if (NetworkPropertyHandler.Instance is NetworkPropertyHandler nph)
             {
-                nph.OnPlayerLeft -= OnPlayerLeft;
                 nph.OnPlayerJoined -= OnPlayerJoined;
             }
-            if (!(gloves is null))
+            StartCoroutine(DelGloves());
+        }
+        public IEnumerator DelGloves()
+        {
+            /*foreach (var g in Resources.FindObjectsOfTypeAll<BoxingGlove>())
             {
-                foreach (BoxingGlove g in gloves)
-                {
-                    gloves.Remove(g);
-                    Destroy(g?.gameObject);
-                }
+                g.Obliterate();
+            }*/
+            foreach (var g in gloves)
+            {
+                g.Obliterate();
             }
+            gloves.Clear();
+            yield return new WaitForEndOfFrame();
         }
 
-        void OnPlayerLeft(NetworkPlayer player)
+        private void OnPlayerJoined(NetworkPlayer player)
         {
-            Logging.Debug(player.NickName, "left. Destroying gloves.");
-
-            foreach (BoxingGlove g in gloves)
-            {
-                if (g && g?.rig.OwningNetPlayer == player)
-                {
-                    gloves.Remove(g);
-                    Destroy(g?.gameObject);
-                    Logging.Debug($"Destroyed {player.NickName}'s gloves.");
-                }
-            }
-            foreach (VRRig rig in glovedRigs)
-            {
-                if (rig.OwningNetPlayer == player) 
-                {
-                    glovedRigs.Remove(rig);
-                }
-            }
-        }
-
-        Queue<NetworkPlayer> gloveQueue = new Queue<NetworkPlayer>();
-        void OnPlayerJoined(NetworkPlayer player)
-        {
-            Logging.Debug(player.NickName, "joined. Giving them gloves.");
-            gloveQueue.Enqueue(player);
-            Invoke(nameof(ClearQueue), 1f);
-        }
-
-        void ClearQueue()
-        {
-            Logging.Debug("Clearing queue");
-            while (gloveQueue.Count > 0)
-            {
-                NetworkPlayer player = gloveQueue.Dequeue();
-                Logging.Debug($"Giving gloves to {player.NickName}");
-                foreach (var rig in GorillaParent.instance.vrrigs)
-                {
-                    Logging.Debug($"    {rig?.OwningNetPlayer?.NickName} == {player?.NickName}: {rig?.OwningNetPlayer?.UserId == player.UserId}");
-                    if (rig?.PhotonView() && rig.OwningNetPlayer == player)
-                    {
-                        GiveGlovesTo(rig);
-                    }
-                }
-            }
+            GiveGlovesTo(player.Rig());
         }
 
         void CreateGloves()
@@ -145,8 +120,10 @@ namespace Grate.Modules.Multiplayer
             {
                 try
                 {
-                    if (rig.OwningNetPlayer.IsLocal || glovedRigs.Contains(rig)) continue;
-                    GiveGlovesTo(rig);
+                    if (rig != GorillaTagger.Instance.offlineVRRig && rig != GorillaTagger.Instance.myVRRig && !glovedRigs.Contains(rig) && rig.OwningNetPlayer != GorillaTagger.Instance.myVRRig.Owner)
+                    {
+                        GiveGlovesTo(rig);
+                    }
                 }
                 catch (Exception e)
                 {

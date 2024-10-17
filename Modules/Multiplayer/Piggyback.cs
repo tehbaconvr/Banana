@@ -173,7 +173,7 @@ namespace Grate.Modules.Multiplayer
                         GorillaTagger.Instance.offlineVRRig.PlayHandTapLocal(68, false, 1f);
                         return false;
                     }
-                    Mount(closest.transform, closest.rig);
+                    Mount(closest.rig.headConstraint, closest.rig);
                     return true;
                 }
             }

@@ -70,7 +70,7 @@ namespace Grate.Modules.Movement
             collider.gameObject.layer = NoClip.active ? NoClip.layer : 0;
             collider.gameObject.layer = NoClip.active ? NoClip.layer : 0;
             collider.enabled = true;
-            HandBlock.SetActive(true);
+            HandBlock.SetActive(isSticky);
             this.model.SetActive(true);
             if (modelName == "storm cloud")
             {
@@ -111,8 +111,6 @@ namespace Grate.Modules.Movement
             set
             {
                 this.isSticky = value;
-                if (isActive)
-                    HandBlock.SetActive(isSticky);
             }
         }
 

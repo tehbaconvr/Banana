@@ -13,8 +13,8 @@ namespace Grate.Patches
         {
             "JoinRandomRoom failed.",
             "PhotonView does not exist!",
-            "Photon.Pun.PhotonHandler.FixedUpdate ()",
-            "Photon.Voice.Unity.VoiceConnection.FixedUpdate ()",
+            "Photon.Pun.PhotonHandler.DelGloves ()",
+            "Photon.Voice.Unity.VoiceConnection.DelGloves ()",
             "GorillaNetworking.PhotonNetworkController.DisconnectCleanup ()",
         };
 
