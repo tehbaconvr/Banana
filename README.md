@@ -62,7 +62,7 @@ To install *Grate*, simply download the .dll from releases and put it in your Go
 While *Grate* is designed to be safe to use in modded lobbies, it is important to note that using mods in any form in public lobbies or non-modded privates can result in a ban from the game. Use *Grate* at your own risk and only in modded lobbies.
 
 ## Bugs and issues
-If you encounter any bugs or issues while using *Grate*, please report them on the mod's GitHub page. I will do my best to address them as soon as possible. 
+If you encounter any bugs or issues while using *Grate*, please report them on the mod's GitHub page or my discord server linked above. I will do my best to address them as soon as possible. 
 
 ## Contributing
 If you would like to contribute to *Grate*, feel free to submit a pull request on the mod's GitHub page. I welcome any and all contributions that can help make the mod better for everyone.
