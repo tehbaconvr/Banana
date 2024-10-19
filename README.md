@@ -72,7 +72,7 @@ If you would like to contribute to *Grate*, feel free to submit a pull request o
 *Bark* was created by KyleTheScientist. 
 Thanks to the Gorilla Tag modding community for their support.
 
-Special thanks to my Kyles little brother Asher for helping him test :)
+Special thanks to Kyles little brother Asher for helping him test :)
 
 * [Boxing Gloves model](https://skfb.ly/6XOUS) by Gohar.Munir is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
