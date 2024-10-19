@@ -67,6 +67,8 @@ If you encounter any bugs or issues while using *Grate*, please report them on t
 ## Contributing
 If you would like to contribute to *Grate*, feel free to submit a pull request on the mod's GitHub page. I welcome any and all contributions that can help make the mod better for everyone.
 
+or pop a msg in my discord server and I may add it
+
 ## Credits
 *Grate* was created by Graze. 
 *Bark* was created by KyleTheScientist. 
