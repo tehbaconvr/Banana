@@ -4,9 +4,10 @@
 
 *Grate* is a mod for the VR game Gorilla Tag. It allows the player to summon a 3D interface into the game that toggles various fun/useful mechanics on and off. Because it is only enabled in modded lobbies, this mod is safe to use online.
 
-[![Mod Showcase Link](https://img.youtube.com/vi/geyMo9pVSEE/0.jpg)](https://www.youtube.com/watch?v=geyMo9pVSEE)
+[![Mod Showcase Link](https://img.youtube.com/vi/ZAYFbcq63nc/0.jpg)](https://youtu.be/ZAYFbcq63nc)
 
-(*Grate* looks slightly different, having a grey menu instead, but it works the same!)
+(Watch this video by Rylan showing off Grate!)
+
 
 ## Links
 
@@ -48,6 +49,7 @@
   pick you up and throw you from afar.
 ### Miscellaneous
 * `Join Grate Code` - Allows you to join a private lobby with other Grate users. (This module was changed, formerly being 'Join Bark Code', but it was changed for Grate.)
+* `Settings` - At the top of the *Grate* menu on any page, allows you to change settings for most modules.
 
 These modules can be useful for exploring the game world, experimenting with gameplay mechanics, or just having fun with friends. They are **not** meant to be used to harass others, which can result in a ban from the game.
 
