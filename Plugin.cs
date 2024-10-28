@@ -20,8 +20,7 @@ using Photon.Pun;
 
 namespace Grate
 {
-    [ModdedGamemode]
-    [BepInDependency("org.legoandmars.gorillatag.utilla")]
+    [BepInDependency("Lofiat.Newtilla")]
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
 
     public class Plugin : BaseUnityPlugin
@@ -199,6 +198,8 @@ namespace Grate
                 string platform = (string)Traverse.Create(GorillaNetworking.PlayFabAuthenticator.instance).Field("platform").GetValue();
                 Logging.Info("Platform: ", platform);
                 IsSteam = platform.ToLower().Contains("steam");
+                Newtilla.Newtilla.OnJoinModded += RoomJoined;
+                Newtilla.Newtilla.OnLeaveModded += RoomLeft;
                 if (DebugMode)
                     CreateDebugGUI();
             }
@@ -207,8 +208,7 @@ namespace Grate
                 Logging.Exception(ex);
             }
         }
-
-        [ModdedGamemodeJoin]
+            
         void RoomJoined(string gamemode)
         {
             Logging.Debug("RoomJoined");
@@ -216,7 +216,6 @@ namespace Grate
             Setup();
         }
 
-        [ModdedGamemodeLeave]
         void RoomLeft(string gamemode)
         {
             Logging.Debug("RoomLeft");

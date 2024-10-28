@@ -123,7 +123,7 @@ namespace Grate.Gestures
             TrackBodyVectors();
             TrackGlideGesture();
             isIlluminatiing = TrackIlluminatiGesture();
-            //isChargingKamehameha = TrackKamehamehaGesture();
+            isChargingKamehameha = TrackKamehamehaGesture();
         }
 
         public void UpdateValues()

@@ -26,18 +26,21 @@ namespace Grate.Modules.Multiplayer
             try
             {
                 base.OnEnable();
-                if (!MenuController.Instance.Built) return; // This all needs to be moved to OnEnable before it can work
-                bananaLine = Instantiate(Plugin.assetBundle.LoadAsset<GameObject>("Laser Sight")).GetComponent<LineRenderer>();
-                bananaLine.gameObject.SetActive(false);
-                orb = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
-                orb.gameObject.SetActive(false);
-                orb.gameObject.GetComponent<Collider>().isTrigger = true;
-                orbBody = orb.gameObject.AddComponent<Rigidbody>();
-                orbBody.isKinematic = true;
-                orbBody.useGravity = false;
-                orb.gameObject.layer = GrateInteractor.InteractionLayer;
-                orb.gameObject.GetComponent<Renderer>().material = bananaLine.material;
-                GestureTracker.Instance.OnKamehameha += OnKamehameha;
+                if (MenuController.Instance.Built)
+                {
+
+                    bananaLine = Instantiate(Plugin.assetBundle.LoadAsset<GameObject>("Laser Sight")).GetComponent<LineRenderer>();
+                    bananaLine.gameObject.SetActive(false);
+                    orb = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
+                    orb.gameObject.SetActive(false);
+                    orb.gameObject.GetComponent<Collider>().isTrigger = true;
+                    orbBody = orb.gameObject.AddComponent<Rigidbody>();
+                    orbBody.isKinematic = true;
+                    orbBody.useGravity = false;
+                    orb.gameObject.layer = GrateInteractor.InteractionLayer;
+                    orb.gameObject.GetComponent<Renderer>().material = bananaLine.material;
+                    GestureTracker.Instance.OnKamehameha += OnKamehameha;
+                }
 
             }
             catch (Exception e) { Logging.Exception(e); }
