@@ -20,7 +20,6 @@ using Photon.Pun;
 
 namespace Grate
 {
-    [BepInDependency("Lofiat.Newtilla")]
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
 
     public class Plugin : BaseUnityPlugin
@@ -198,8 +197,12 @@ namespace Grate
                 string platform = (string)Traverse.Create(GorillaNetworking.PlayFabAuthenticator.instance).Field("platform").GetValue();
                 Logging.Info("Platform: ", platform);
                 IsSteam = platform.ToLower().Contains("steam");
-                Newtilla.Newtilla.OnJoinModded += RoomJoined;
-                Newtilla.Newtilla.OnLeaveModded += RoomLeft;
+                //Newtilla.Newtilla.OnJoinModded += RoomJoined;
+                //Newtilla.Newtilla.OnLeaveModded += RoomLeft;
+
+                //Doing this cos it works with both new and old utilla, will remove soon prob
+                Utilla.Events.RoomJoined += RoomJoined;
+                Utilla.Events.RoomLeft += RoomLeft;
                 if (DebugMode)
                     CreateDebugGUI();
             }
@@ -208,19 +211,25 @@ namespace Grate
                 Logging.Exception(ex);
             }
         }
-            
-        void RoomJoined(string gamemode)
+
+        void RoomJoined(object sender, Utilla.Events.RoomJoinedArgs e)
         {
-            Logging.Debug("RoomJoined");
-            inRoom = true;
-            Setup();
+            if (e.Gamemode.Contains("MODDED_"))
+            {
+                Logging.Debug("RoomJoined");
+                inRoom = true;
+                Setup();
+            }
         }
 
-        void RoomLeft(string gamemode)
+        void RoomLeft(object sender, Utilla.Events.RoomJoinedArgs e)
         {
-            Logging.Debug("RoomLeft");
-            inRoom = false;
-            Cleanup();
+            if (e.Gamemode.Contains("MODDED_"))
+            {
+                Logging.Debug("RoomLeft");
+                inRoom = false;
+                Cleanup();
+            }
         }
 
         public void JoinLobby(string name, string gamemode)
