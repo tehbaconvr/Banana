@@ -5,8 +5,8 @@
     /// </summary>
     internal class PluginInfo
     {
-        public const string GUID = "com.kylethescientist.graze.gorillatag.Grate";
-        public const string Name = "Grate";
-        public const string Version = "1.5.5"; 
+        public const string GUID = "com.kylethescientist.graze.tehbaconvr.gorillatag.Banana";
+        public const string Name = "Banana";
+        public const string Version = "0.0.1"; 
     }
 }
